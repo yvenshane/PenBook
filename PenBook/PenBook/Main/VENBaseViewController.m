@@ -14,26 +14,42 @@
 
 @implementation VENBaseViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // nav 黑线
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // nav 黑线
+    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    self.view.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // 不允许 viewController 自动调整，我们自己布局；如果设置为YES，视图会自动下移 64 像素
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     // 判断是否有上级页面，有的话再调用
     if ([self.navigationController.viewControllers indexOfObject:self] > 0) {
-        [self setupNavigationItemLeftBarButtonItem];
+        [self setupNavigationItemLeftBarBackButtonItem];
     }
 }
 
-- (void)setupNavigationItemLeftBarButtonItem {
+- (void)setupNavigationItemLeftBarBackButtonItem {
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     button.contentEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
     [button setImage:[UIImage imageNamed:@"top_back01"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(leftButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(leftBackButtonClick) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
     self.navigationItem.leftBarButtonItem = barButton;
     
@@ -41,7 +57,7 @@
     self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
 }
 
-- (void)leftButtonClick {
+- (void)leftBackButtonClick {
     [self.navigationController popViewControllerAnimated:YES];
 }
 

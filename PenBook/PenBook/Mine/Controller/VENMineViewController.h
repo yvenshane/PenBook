@@ -6,8 +6,8 @@
 //  Copyright © 2018年 Hefei Haiba Network Technology Co., Ltd. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "VENBaseViewController.h"
 
-@interface VENMineViewController : UIViewController
+@interface VENMineViewController : VENBaseViewController
 
 @end

@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     
     UIViewController *vc1 = [self loadChildViewControllerWithClassName:@"VENExplorePageViewController" andTitle:@"探索" andImageName:@"icon_nav03"];
-    UIViewController *vc2 = [self loadChildViewControllerWithClassName:@"" andTitle:@"" andImageName:@""];
+    UIViewController *vc2 = [[UIViewController alloc] init];
     UIViewController *vc3 = [self loadChildViewControllerWithClassName:@"VENMineViewController" andTitle:@"我的" andImageName:@"icon_nav01"];
     
     self.viewControllers = @[vc1, vc2, vc3];
@@ -27,11 +27,23 @@
     self.tabBar.tintColor = COLOR_THEME;
     //    self.tabBar.barTintColor = [UIColor whiteColor];
     self.tabBar.translucent = NO;
+
+    // 去除 tabBar 黑线
+    CGRect rect = CGRectMake(0, 0, kMainScreenWidth, 1);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.tabBar setBackgroundImage:img];
+    [self.tabBar setShadowImage:img];
     
-    CGRect rect = self.tabBar.bounds;
-    CGFloat width = rect.size.width / 3;
+    // 加号 按钮
+    CGRect rect2 = self.tabBar.bounds;
+    CGFloat width = rect2.size.width / 3;
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectInset(rect, width, -16)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectInset(rect2, width, -16)];
     [button setImage:[UIImage imageNamed:@"icon_nav02"] forState:UIControlStateNormal];
     button.imageEdgeInsets = UIEdgeInsetsMake(-16, 0, 0, 0);
     [self.tabBar addSubview:button];
