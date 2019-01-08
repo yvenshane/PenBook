@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VENGuidePageViewControllerFive">
+            <connections>
+                <outlet property="finishButon" destination="utF-Y6-iOf" id="QMH-Dm-G5A"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="utF-Y6-iOf">
+                    <rect key="frame" x="86.5" y="574" width="202" height="48"/>
+                    <color key="backgroundColor" red="0.31372549020000001" green="0.3803921569" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="202" id="1Mi-bw-E65"/>
+                        <constraint firstAttribute="height" constant="48" id="JIk-QE-qJg"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                    <state key="normal" title="完成">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="finishButtonClick:" destination="-1" eventType="touchUpInside" id="w2d-by-1PG"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="为您精心推荐了以下游戏" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDc-Aq-oJg">
+                    <rect key="frame" x="0.0" y="26" width="375" height="32"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="f4a-aD-jMl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <color key="textColor" red="0.4039215686" green="0.4039215686" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此数据仅作为调查，方便您找到志同道合的人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xCC-gi-Q2x">
+                    <rect key="frame" x="0.0" y="63" width="375" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="Xeg-jv-fhI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.72156862749999995" green="0.72156862749999995" blue="0.72156862749999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="kDc-Aq-oJg" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="0if-Cc-qAw"/>
+                <constraint firstItem="xCC-gi-Q2x" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="EMB-tX-sob"/>
+                <constraint firstItem="utF-Y6-iOf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Lc1-6r-7zT"/>
+                <constraint firstItem="kDc-Aq-oJg" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="TJ2-yo-0EP"/>
+                <constraint firstItem="xCC-gi-Q2x" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="gUg-tA-axZ"/>
+                <constraint firstItem="kDc-Aq-oJg" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="6" id="iio-Cm-8qv"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="utF-Y6-iOf" secondAttribute="bottom" constant="45" id="mfP-aP-QL8"/>
+                <constraint firstItem="xCC-gi-Q2x" firstAttribute="top" secondItem="kDc-Aq-oJg" secondAttribute="bottom" constant="5" id="n8w-C9-vfM"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+</document>
