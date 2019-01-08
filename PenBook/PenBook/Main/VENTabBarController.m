@@ -7,6 +7,7 @@
 
 #import "VENTabBarController.h"
 #import "VENNavigationController.h"
+#import "VENPublishViewController.h"
 
 @interface VENTabBarController () <UITabBarControllerDelegate>
 
@@ -45,8 +46,14 @@
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectInset(rect2, width, -16)];
     [button setImage:[UIImage imageNamed:@"icon_nav02"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(editButtonClick) forControlEvents:UIControlEventTouchUpInside];
     button.imageEdgeInsets = UIEdgeInsetsMake(-16, 0, 0, 0);
     [self.tabBar addSubview:button];
+}
+
+- (void)editButtonClick {
+    VENPublishViewController *vc = [[VENPublishViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (UIViewController *)loadChildViewControllerWithClassName:(NSString *)className andTitle:(NSString *)title andImageName:(NSString *)imageName {
