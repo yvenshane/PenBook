@@ -129,6 +129,9 @@
 		2C2E2CA821E447A500460B7E /* VENGuidePageViewControllerFour.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2E2CA621E447A500460B7E /* VENGuidePageViewControllerFour.xib */; };
 		2C2E2CAC21E4481300460B7E /* VENGuidePageViewControllerFive.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2CAA21E4481200460B7E /* VENGuidePageViewControllerFive.m */; };
 		2C2E2CAD21E4481300460B7E /* VENGuidePageViewControllerFive.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2E2CAB21E4481300460B7E /* VENGuidePageViewControllerFive.xib */; };
+		2C2E2CB521E48CBB00460B7E /* VENClassEmptyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2CB021E48CBA00460B7E /* VENClassEmptyManager.m */; };
+		2C2E2CB621E48CBB00460B7E /* VENMBProgressHUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2CB221E48CBA00460B7E /* VENMBProgressHUDManager.m */; };
+		2C2E2CB721E48CBB00460B7E /* VENNetworkTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2CB421E48CBA00460B7E /* VENNetworkTool.m */; };
 		2C51CC7921C74EE1008B238E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C51CC7821C74EE1008B238E /* AppDelegate.m */; };
 		2C51CC8121C74EE3008B238E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C51CC8021C74EE3008B238E /* Assets.xcassets */; };
 		2C51CC8421C74EE3008B238E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C51CC8221C74EE3008B238E /* LaunchScreen.storyboard */; };
@@ -416,6 +419,12 @@
 		2C2E2CA921E4481200460B7E /* VENGuidePageViewControllerFive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENGuidePageViewControllerFive.h; sourceTree = "<group>"; };
 		2C2E2CAA21E4481200460B7E /* VENGuidePageViewControllerFive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENGuidePageViewControllerFive.m; sourceTree = "<group>"; };
 		2C2E2CAB21E4481300460B7E /* VENGuidePageViewControllerFive.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENGuidePageViewControllerFive.xib; sourceTree = "<group>"; };
+		2C2E2CAF21E48CBA00460B7E /* VENMBProgressHUDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VENMBProgressHUDManager.h; sourceTree = "<group>"; };
+		2C2E2CB021E48CBA00460B7E /* VENClassEmptyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VENClassEmptyManager.m; sourceTree = "<group>"; };
+		2C2E2CB121E48CBA00460B7E /* VENNetworkTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VENNetworkTool.h; sourceTree = "<group>"; };
+		2C2E2CB221E48CBA00460B7E /* VENMBProgressHUDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VENMBProgressHUDManager.m; sourceTree = "<group>"; };
+		2C2E2CB321E48CBA00460B7E /* VENClassEmptyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VENClassEmptyManager.h; sourceTree = "<group>"; };
+		2C2E2CB421E48CBA00460B7E /* VENNetworkTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VENNetworkTool.m; sourceTree = "<group>"; };
 		2C51CC7421C74EE1008B238E /* PenBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PenBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C51CC7721C74EE1008B238E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2C51CC7821C74EE1008B238E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1051,6 +1060,19 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		2C2E2CAE21E48CBA00460B7E /* SharedManager */ = {
+			isa = PBXGroup;
+			children = (
+				2C2E2CAF21E48CBA00460B7E /* VENMBProgressHUDManager.h */,
+				2C2E2CB221E48CBA00460B7E /* VENMBProgressHUDManager.m */,
+				2C2E2CB321E48CBA00460B7E /* VENClassEmptyManager.h */,
+				2C2E2CB021E48CBA00460B7E /* VENClassEmptyManager.m */,
+				2C2E2CB121E48CBA00460B7E /* VENNetworkTool.h */,
+				2C2E2CB421E48CBA00460B7E /* VENNetworkTool.m */,
+			);
+			path = SharedManager;
+			sourceTree = "<group>";
+		};
 		2C51CC6B21C74EE1008B238E = {
 			isa = PBXGroup;
 			children = (
@@ -1070,6 +1092,7 @@
 		2C51CC7621C74EE1008B238E /* PenBook */ = {
 			isa = PBXGroup;
 			children = (
+				2C2E2CAE21E48CBA00460B7E /* SharedManager */,
 				2C010F2421E2105200B8FDC5 /* ThirdPartyFramework */,
 				2C51CC8E21C755AB008B238E /* Main */,
 				2C7C817421E3A0B1004BE9A7 /* GuidePage */,
@@ -1505,10 +1528,12 @@
 				2C2E2CA221E444B800460B7E /* VENGuidePageViewControllerThree.m in Sources */,
 				2C0110A421E2105200B8FDC5 /* SDWebImageDecoder.m in Sources */,
 				2C0110A821E2105200B8FDC5 /* UIImage+MultiFormat.m in Sources */,
+				2C2E2CB721E48CBB00460B7E /* VENNetworkTool.m in Sources */,
 				2C7C816E21E392DB004BE9A7 /* VENMinePagemMyGameSubviewsController.m in Sources */,
 				2C01108021E2105200B8FDC5 /* IQTitleBarButtonItem.m in Sources */,
 				2C01108A21E2105200B8FDC5 /* IQUIViewController+Additions.m in Sources */,
 				2C01109921E2105200B8FDC5 /* AFNetworkReachabilityManager.m in Sources */,
+				2C2E2CB621E48CBB00460B7E /* VENMBProgressHUDManager.m in Sources */,
 				2C01109D21E2105200B8FDC5 /* UIView+SDExtension.m in Sources */,
 				2C01107E21E2105200B8FDC5 /* IQTextView.m in Sources */,
 				2C01104D21E2105200B8FDC5 /* MJRefreshGifHeader.m in Sources */,
@@ -1583,6 +1608,7 @@
 				2C01107A21E2105200B8FDC5 /* MASViewConstraint.m in Sources */,
 				2C01104521E2105200B8FDC5 /* MJRefreshBackGifFooter.m in Sources */,
 				2C0110AC21E2105200B8FDC5 /* SDWebImageDownloaderOperation.m in Sources */,
+				2C2E2CB521E48CBB00460B7E /* VENClassEmptyManager.m in Sources */,
 				2C0110A321E2105200B8FDC5 /* SDWebImageManager.m in Sources */,
 				2C01108321E2105200B8FDC5 /* IQPreviousNextView.m in Sources */,
 				2C01103F21E2105200B8FDC5 /* UIScrollView+MJRefresh.m in Sources */,
