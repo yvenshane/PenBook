@@ -23,11 +23,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"first"]) {
-        VENGuidePageViewControllerOne *vc = [[VENGuidePageViewControllerOne alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:NO];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -39,6 +34,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"first"]) {
+        VENGuidePageViewControllerOne *vc = [[VENGuidePageViewControllerOne alloc] init];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:NO];
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;

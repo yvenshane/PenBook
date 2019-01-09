@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VENGuidePageViewControllerOne">
             <connections>
+                <outlet property="backgroundImageView" destination="hmN-du-Aut" id="YyQ-8Z-tiZ"/>
                 <outlet property="nextButton" destination="189-sE-2jD" id="1Uw-Z8-lSz"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

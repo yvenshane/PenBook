@@ -10,6 +10,7 @@
 #import "VENGuidePageViewControllerTwo.h"
 
 @interface VENGuidePageViewControllerOne ()
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 
 @end
@@ -35,8 +36,10 @@
 }
 
 - (IBAction)nextButtonClick:(id)sender {
-    VENGuidePageViewControllerTwo *vc = [[VENGuidePageViewControllerTwo alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    VENGuidePageViewControllerTwo *vc = [[VENGuidePageViewControllerTwo alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

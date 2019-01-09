@@ -8,6 +8,7 @@
 #import "VENTabBarController.h"
 #import "VENNavigationController.h"
 #import "VENPublishViewController.h"
+#import "VENLoginViewController.h"
 
 @interface VENTabBarController () <UITabBarControllerDelegate>
 
@@ -23,11 +24,15 @@
     UIViewController *vc2 = [[UIViewController alloc] init];
     UIViewController *vc3 = [self loadChildViewControllerWithClassName:@"VENMineViewController" andTitle:@"我的" andImageName:@"icon_nav01"];
     
+    vc2.tabBarItem.tag = 1;
+    vc3.tabBarItem.tag = 2;
     self.viewControllers = @[vc1, vc2, vc3];
     
+    self.delegate = self;
     self.tabBar.tintColor = COLOR_THEME;
     //    self.tabBar.barTintColor = [UIColor whiteColor];
     self.tabBar.translucent = NO;
+    
 
     // 去除 tabBar 黑线
     CGRect rect = CGRectMake(0, 0, kMainScreenWidth, 1);
@@ -54,6 +59,20 @@
 - (void)editButtonClick {
     VENPublishViewController *vc = [[VENPublishViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    if (viewController.tabBarItem.tag == 2) {
+        if ([[VENLoginStatusManager sharedManager] isLogin]) {
+            return YES;
+        } else {
+            VENLoginViewController *vc = [[VENLoginViewController alloc] init];
+            [self presentViewController:vc animated:YES completion:nil];
+            return NO;
+        }
+    } else {
+        return YES;
+    }
 }
 
 - (UIViewController *)loadChildViewControllerWithClassName:(NSString *)className andTitle:(NSString *)title andImageName:(NSString *)imageName {
