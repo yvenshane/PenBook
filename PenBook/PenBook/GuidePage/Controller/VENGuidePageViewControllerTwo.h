@@ -10,7 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef void (^finishBlock)(NSString *);
 @interface VENGuidePageViewControllerTwo : VENBaseViewController
+@property (nonatomic, copy) finishBlock blk;
 
 @end
 

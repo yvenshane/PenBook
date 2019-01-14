@@ -6,6 +6,9 @@
 //
 
 #import "VENNetworkTool.h"
+#import <ifaddrs.h>
+#import <arpa/inet.h>
+#import <AdSupport/AdSupport.h>
 
 @interface VENNetworkTool ()
 @property (nonatomic, assign) BOOL isConnectInternet;
@@ -19,7 +22,7 @@ static dispatch_once_t onceToken;
 
 + (instancetype)sharedManager {
     dispatch_once(&onceToken, ^{
-        instance = [[VENNetworkTool alloc] initWithBaseURL:[NSURL URLWithString:@"http://47.98.181.74"]];
+        instance = [[VENNetworkTool alloc] initWithBaseURL:[NSURL URLWithString:@"http://ad.bestmago.com/"]];
     });
     return instance;
 }
@@ -30,7 +33,7 @@ static dispatch_once_t onceToken;
         //request
         self.requestSerializer.timeoutInterval = 15;
         self.requestSerializer.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-//        [self.requestSerializer setValue:@"" forHTTPHeaderField:@""];
+        [self.requestSerializer setValue:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"] forHTTPHeaderField:@"userid"];
         self.requestSerializer.HTTPShouldHandleCookies = YES;
         
         //response
@@ -77,6 +80,10 @@ static dispatch_once_t onceToken;
             [self showLoading:isShow];
             [self GET:path parameters:mutableParams progress:nil success:^(NSURLSessionTask *task, id responseObject) {
                 [self hideLoading:isShow];
+                NSLog(@"%@", responseObject);
+                
+//                [[VENMBProgressHUDManager sharedManager] showText:responseObject[@"msg"]];
+                
                 success(responseObject);
             } failure:^(NSURLSessionTask *operation, NSError *error) {
                 [self hideLoading:isShow];
@@ -90,9 +97,7 @@ static dispatch_once_t onceToken;
                 [self hideLoading:isShow];
                 NSLog(@"%@", responseObject);
                 
-                if ([responseObject[@"code"] integerValue] == 10099) {
-                    
-                }
+//                [[VENMBProgressHUDManager sharedManager] showText:responseObject[@"msg"]];
                 
                 success(responseObject);
             } failure:^(NSURLSessionTask *operation, NSError *error) {
@@ -164,6 +169,36 @@ static dispatch_once_t onceToken;
         //隐藏正在显示的loading
         [[VENMBProgressHUDManager sharedManager] removeLoading];
     }
+}
+
+- (NSString *)getIPAddress {
+    NSString *address = @"error";
+    struct ifaddrs *interfaces = NULL;
+    struct ifaddrs *temp_addr = NULL;
+    int success = 0;
+    // 检索当前接口,在成功时,返回0
+    success = getifaddrs(&interfaces);
+    if (success == 0) {
+        // 循环链表的接口
+        temp_addr = interfaces;
+        while(temp_addr != NULL) {
+            if(temp_addr->ifa_addr->sa_family == AF_INET) {
+                // 检查接口是否en0 wifi连接在iPhone上
+                if([[NSString stringWithUTF8String:temp_addr->ifa_name] isEqualToString:@"en0"]) {
+                    // 得到NSString从C字符串
+                    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+                }
+            }
+            temp_addr = temp_addr->ifa_next;
+        }
+    }
+    // 释放内存
+    freeifaddrs(interfaces);
+    return address;
+}
+
+- (NSString *)getIDFA {
+    return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
 @end

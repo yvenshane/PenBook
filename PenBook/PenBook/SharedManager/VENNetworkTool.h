@@ -19,6 +19,9 @@ typedef enum {
 @interface VENNetworkTool : AFHTTPSessionManager
 + (instancetype)sharedManager;
 - (BOOL)isConnectInternet;
+- (void)requestWithMethod:(HTTPMethod)method path:(NSString *)path params:(NSDictionary *)params showLoading:(BOOL)isShow successBlock:(SuccessBlock)success failureBlock:(FailureBlock)failure;
 - (void)startMonitorNetworkWithBlock:(NetworkStatusBlock)block;
+- (NSString *)getIPAddress;
+- (NSString *)getIDFA;
 
 @end

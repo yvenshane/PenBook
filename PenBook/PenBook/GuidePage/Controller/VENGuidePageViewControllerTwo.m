@@ -22,24 +22,63 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.nextButton.layer.cornerRadius = 24.0f;
+    self.nextButton.layer.masksToBounds = YES;
     
+    [self setupNavigationItemRightBarBackButtonItem];
+}
+
+- (IBAction)nextButtonClick:(id)sender {
     
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:self.topTextField.text]) {
+        [[VENMBProgressHUDManager sharedManager] showText:@"请输入您正在玩的游戏"];
+        return;
+    }
     
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:self.bottomTextField.text]) {
+        [[VENMBProgressHUDManager sharedManager] showText:@"请输入您游戏所在的区服"];
+        return;
+    }
     
-    [[VENNetworkTool sharedManager] GET:@"Recordlogin/gametype" parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    NSDictionary *params = @{@"game" : self.topTextField.text,
+                             @"servicearea" : self.bottomTextField.text};
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordlogin/usertype" params:params showLoading:YES successBlock:^(id response) {
         
-        NSLog(@"%@", responseObject);
+        if ([response[@"ret"] integerValue] == 1) {
+            VENGuidePageViewControllerThree *vc = [[VENGuidePageViewControllerThree alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", error);
+    } failureBlock:^(NSError *error) {
         
     }];
 }
 
-- (IBAction)nextButtonClick:(id)sender {
-    VENGuidePageViewControllerThree *vc = [[VENGuidePageViewControllerThree alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+- (void)setupNavigationItemLeftBarBackButtonItem {
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    button.contentEdgeInsets = UIEdgeInsetsMake(0, -16, 0, 0);
+    [button addTarget:self action:@selector(leftBackButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = barButton;
+}
+
+- (void)leftBackButtonClick {
+    
+}
+
+- (void)setupNavigationItemRightBarBackButtonItem {
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [button setTitle:@"跳过" forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:14.0f];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(rightButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = barButton;
+}
+
+- (void)rightButtonClick {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VENGuidePageViewControllerFour">
             <connections>
+                <outlet property="backgroundView" destination="Aqs-vB-XIB" id="7IL-qF-bcz"/>
                 <outlet property="nextButton" destination="9la-xe-ZyD" id="GAF-TZ-mmi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -54,16 +55,26 @@
                         <action selector="nextButtonClick:" destination="-1" eventType="touchUpInside" id="9E7-D2-A90"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqs-vB-XIB">
+                    <rect key="frame" x="47.5" y="152" width="280" height="280"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="280" id="YhD-J3-fA4"/>
+                        <constraint firstAttribute="width" constant="280" id="cay-ms-5ge"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="9la-xe-ZyD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="2W1-nX-7UD"/>
                 <constraint firstItem="CNo-Qp-la9" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Aj2-rS-Qvo"/>
                 <constraint firstItem="CNo-Qp-la9" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="VUe-Yj-If3"/>
+                <constraint firstItem="Aqs-vB-XIB" firstAttribute="top" secondItem="CNo-Qp-la9" secondAttribute="bottom" constant="75" id="WW5-gH-aZB"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="9la-xe-ZyD" secondAttribute="bottom" constant="45" id="YUA-XA-VzW"/>
                 <constraint firstItem="NYM-08-mrN" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="6" id="eEi-dM-An7"/>
                 <constraint firstItem="CNo-Qp-la9" firstAttribute="top" secondItem="NYM-08-mrN" secondAttribute="bottom" constant="5" id="oWZ-6U-aJb"/>
                 <constraint firstItem="NYM-08-mrN" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="ozr-fD-59t"/>
+                <constraint firstItem="Aqs-vB-XIB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="rEd-gF-WIc"/>
                 <constraint firstItem="NYM-08-mrN" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="uai-8k-j9f"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

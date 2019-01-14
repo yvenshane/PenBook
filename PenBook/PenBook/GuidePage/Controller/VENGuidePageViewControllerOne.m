@@ -33,13 +33,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+    self.nextButton.layer.cornerRadius = 24.0f;
+    self.nextButton.layer.masksToBounds = YES;
 }
 
-- (IBAction)nextButtonClick:(id)sender {
-//    VENGuidePageViewControllerTwo *vc = [[VENGuidePageViewControllerTwo alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-    
-    [self.navigationController popViewControllerAnimated:YES];
+- (IBAction)nextButtonClick:(id)sender {    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"first"];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /*
