@@ -11,6 +11,10 @@
 #import "VENRegisterTableViewCell.h"
 
 @interface VENRegisterViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, assign) NSInteger seconds;
+@property (nonatomic, strong) NSTimer *countDownTimer;
 
 @end
 
@@ -33,14 +37,12 @@ static NSString *cellIdentifier2 = @"cellIdentifier2";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    
-    
     if (indexPath.row == 1) {
         VENRegisterTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2 forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        
+        cell.bottomTextField.keyboardType = UIKeyboardTypeNumberPad;
+        [cell.rightButton addTarget:self action:@selector(rightButtonClick) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
     } else {
@@ -50,8 +52,55 @@ static NSString *cellIdentifier2 = @"cellIdentifier2";
         [cell.topButton setTitle:indexPath.row == 0 ? @"  手机" : @"  设置密码" forState:UIControlStateNormal];
         [cell.topButton setImage:[UIImage imageNamed:indexPath.row == 0 ? @"icon_phoneNumber" : @"icon_password"] forState:UIControlStateNormal];
         cell.bottomTextField.placeholder = indexPath.row == 0 ? @"请输入手机" : @"请设置您的登录密码";
+        cell.bottomTextField.keyboardType = indexPath.row == 0 ? UIKeyboardTypeNumberPad : UIKeyboardTypeASCIICapable;
+        cell.bottomTextField.secureTextEntry = indexPath.row == 0 ? NO : YES;
         
         return cell;
+    }
+}
+
+#pragma mark - 获取验证码
+- (void)rightButtonClick {
+    VENLoginTableViewCell *cell = (VENLoginTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:cell.bottomTextField.text] || cell.bottomTextField.text.length != 11) {
+        [[VENMBProgressHUDManager sharedManager] showText:@"请输入手机"];
+        return;
+    }
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordlogin/registersms" params:@{@"tel" : cell.bottomTextField.text} showLoading:YES successBlock:^(id response) {
+        
+        
+        if ([response[@"ret"] integerValue] == 1) {
+            self.seconds = 60;
+            self.countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeFireMethod) userInfo:nil repeats:YES];
+        } else {
+            return;
+        }
+        
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
+    
+
+}
+
+- (void)timeFireMethod {
+    _seconds--;
+    
+    VENRegisterTableViewCell *cell = (VENRegisterTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    
+    cell.rightButton.userInteractionEnabled = NO;
+    
+    // titleLabel.text 解决频繁刷新 Button 闪烁的问题
+    cell.rightButton.titleLabel.text = [NSString stringWithFormat:@"%lds", (long)_seconds];
+    [cell.rightButton setTitle:[NSString stringWithFormat:@"%lds", (long)_seconds] forState:UIControlStateNormal];
+    
+    if(_seconds == 0) {
+        [_countDownTimer invalidate];
+        [cell.rightButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+        cell.rightButton.userInteractionEnabled = YES;
     }
 }
 
@@ -88,7 +137,48 @@ static NSString *cellIdentifier2 = @"cellIdentifier2";
     registerButton.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     registerButton.layer.cornerRadius = 24.0f;
     registerButton.layer.masksToBounds = YES;
+    [registerButton addTarget:self action:@selector(registerButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [footerView addSubview:registerButton];
+    
+    _tableView = tableView;
+}
+
+#pragma mark - 注册
+- (void)registerButtonClick {
+    VENLoginTableViewCell *cell = (VENLoginTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:cell.bottomTextField.text] || cell.bottomTextField.text.length != 11) {
+        [[VENMBProgressHUDManager sharedManager] showText:@"请输入手机"];
+        return;
+    }
+    
+    VENRegisterTableViewCell *cell1 = (VENRegisterTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:cell1.bottomTextField.text]) {
+        [[VENMBProgressHUDManager sharedManager] showText:@"请输入验证码"];
+        return;
+    }
+    
+    VENLoginTableViewCell *cell2 = (VENLoginTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:cell2.bottomTextField.text]) {
+        [[VENMBProgressHUDManager sharedManager] showText:@"请设置您的登录密码"];
+        return;
+    }
+    
+    NSDictionary *params = @{@"ip" : [[VENNetworkTool sharedManager] getIPAddress],
+                             @"tel" : cell.bottomTextField.text,
+                             @"code" : cell1.bottomTextField.text,
+                             @"pass" : cell2.bottomTextField.text};
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"index.php/Recordlogin/register" params:params showLoading:YES successBlock:^(id response) {
+        
+        if ([response[@"ret"] integerValue] == 1) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        } else {
+            return;
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (void)setupNavigationBar {

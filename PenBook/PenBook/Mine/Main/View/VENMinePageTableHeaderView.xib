@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,7 +45,7 @@
                     </state>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LabelLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JK3-d5-s9v">
-                    <rect key="frame" x="94" y="61" width="79" height="20"/>
+                    <rect key="frame" x="94" y="61.5" width="79" height="20"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -71,14 +71,14 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_fans" translatesAutoresizingMaskIntoConstraints="NO" id="q2v-5C-qLr">
-                            <rect key="frame" x="45" y="8" width="21" height="21"/>
+                            <rect key="frame" x="45.5" y="8" width="21" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="21" id="8XT-Cp-eZh"/>
                                 <constraint firstAttribute="height" constant="21" id="y99-QR-SGt"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的粉丝" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ou-Qs-ToV">
-                            <rect key="frame" x="25" y="39" width="60" height="21"/>
+                            <rect key="frame" x="26" y="39" width="60" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="nnd-Ak-3Fe"/>
                             </constraints>
@@ -111,14 +111,14 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_game2" translatesAutoresizingMaskIntoConstraints="NO" id="QOC-Ml-CXP">
-                            <rect key="frame" x="269" y="8" width="21" height="21"/>
+                            <rect key="frame" x="268.5" y="8" width="21" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="d3a-dR-VQt"/>
                                 <constraint firstAttribute="width" constant="21" id="oRx-f9-38A"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的游戏" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jns-ky-gZo">
-                            <rect key="frame" x="249.5" y="39" width="60" height="21"/>
+                            <rect key="frame" x="249" y="39" width="60" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="yTt-lQ-y9e"/>
                             </constraints>
@@ -127,7 +127,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.69240993923611116" blue="0.69240993923611116" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="74" id="0V8-at-QmV"/>
                         <constraint firstItem="DSn-Pw-s0T" firstAttribute="top" secondItem="0m0-qn-Q0M" secondAttribute="top" id="3Jg-Jb-aBl"/>
@@ -204,6 +204,7 @@
                 <outlet property="nameLabel" destination="FSh-lb-5RP" id="exF-Mf-anh"/>
                 <outlet property="otherButton" destination="GTA-i6-fuk" id="fdz-jo-7bh"/>
                 <outlet property="qianmingLabel" destination="VuX-Gl-UEO" id="Lfm-u3-wQK"/>
+                <outlet property="threeButtonBackgroundView" destination="0m0-qn-Q0M" id="egT-d5-0Xf"/>
                 <outlet property="xingzuoLabel" destination="JK3-d5-s9v" id="mfU-wd-seM"/>
             </connections>
             <point key="canvasLocation" x="75.5" y="-424.5"/>

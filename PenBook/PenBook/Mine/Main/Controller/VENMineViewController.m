@@ -16,7 +16,10 @@
 #import "VENMinePagemMyFocusViewController.h"
 #import "VENMinePagemMyGameViewController.h"
 
+#import "VENMineModel.h"
+
 @interface VENMineViewController ()<UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) VENMineModel *model;
 
 @end
 
@@ -29,10 +32,24 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self setupNavigationItemLeftBarButtonItem];
-    [self setupNavigationItemRightBarButtonItem];
+    [self loadData];
     
-    [self setupTableView];
+
+}
+
+- (void)loadData {
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordtext/appuser" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:YES successBlock:^(id response) {
+        
+        self.model = [VENMineModel yy_modelWithJSON:response];
+
+        [self setupNavigationItemLeftBarButtonItem];
+        [self setupNavigationItemRightBarButtonItem];
+        
+        [self setupTableView];
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -55,8 +72,13 @@ static NSString *cellIdentifier = @"cellIdentifier";
     tableView.estimatedRowHeight = 380;
     [tableView registerNib:[UINib nibWithNibName:@"VENMineTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:tableView];
-    
+
     VENMinePageTableHeaderView *headerView = [[[NSBundle mainBundle] loadNibNamed:@"VENMinePageTableHeaderView" owner:nil options:nil] lastObject];
+    headerView.nameLabel.text = _model.username;
+    [headerView.otherButton setTitle:[NSString stringWithFormat:@"  %@", _model.age] forState:UIControlStateNormal];
+    headerView.xingzuoLabel.text = _model.constell;
+    headerView.qianmingLabel.text = _model.title;
+    
     [headerView.myFansButton addTarget:self action:@selector(myFansButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [headerView.myFocusButton addTarget:self action:@selector(myFocusButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [headerView.myGameButton addTarget:self action:@selector(myGameButtonClick) forControlEvents:UIControlEventTouchUpInside];

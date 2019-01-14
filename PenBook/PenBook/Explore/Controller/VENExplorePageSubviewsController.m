@@ -8,6 +8,7 @@
 
 #import "VENExplorePageSubviewsController.h"
 #import "VENExplorePageTableViewCell.h"
+#import "VENExplorePageModel.h"
 
 @interface VENExplorePageSubviewsController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -26,12 +27,25 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    
+    
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VENExplorePageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    VENExplorePageModel *model = self.dataArr[indexPath.row];
+    
+    cell.gameNameLabel.text = model.title;
+    cell.userNameLabel.text = model.username;
+    cell.contentLabel.text = model.value;
+    
+    [cell.zanButton setTitle:[NSString stringWithFormat:@"  %@", model.give] forState:UIControlStateNormal];
+    [cell.focusButton setTitle:[NSString stringWithFormat:@"  %@", model.collect] forState:UIControlStateNormal];
+    [cell.talkButton setTitle:[NSString stringWithFormat:@"  %@", model.comment] forState:UIControlStateNormal];
+    [cell.shareButton setTitle:[NSString stringWithFormat:@"  %@", model.share] forState:UIControlStateNormal];
     
     return cell;
 }

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface VENExplorePageSubviewsController : UIViewController
+@property (nonatomic, copy) NSArray *dataArr;
 
 @end

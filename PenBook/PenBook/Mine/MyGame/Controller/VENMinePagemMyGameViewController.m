@@ -19,16 +19,29 @@
 
 @implementation VENMinePagemMyGameViewController
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    self.navigationController.interactivePopGestureRecognizer.enabled = (self.categoryView.selectedIndex == 0);
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamerecommend" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:YES successBlock:^(id response) {
+        
+        
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
+    
+
+    
+
+    
+   
+}
+
+- (void)setupSearchTextField {
     UITextField *searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth - 50 - 22, 28)];
     searchTextField.delegate = self;
     searchTextField.font = [UIFont systemFontOfSize:12.0f];
@@ -51,10 +64,51 @@
     [rightView addSubview:searchButton];
     
     self.navigationItem.titleView = searchTextField;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//    VENClassifySearchViewController *vc = [[VENClassifySearchViewController alloc] init];
+//    [self presentViewController:vc animated:NO completion:nil];
     
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+    NSLog(@"搜索页面");
     
+    return NO;
+}
+
+//这句代码必须加上
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods {
+    return NO;
+}
+
+- (NSArray <NSString *> *)getRandomTitles {
+    NSMutableArray *titles = @[@"推荐", @"想玩", @"在玩"].mutableCopy;
+    NSMutableArray *resultArray = [NSMutableArray array];
+    for (int i = 0; i < titles.count; i++) {
+        [resultArray addObject:titles[i]];
+    }
+    return resultArray;
+}
+
+#pragma mark - JXCategoryViewDelegate
+
+- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
+    //侧滑手势处理
+    self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
+}
+
+- (void)categoryView:(JXCategoryBaseView *)categoryView didClickSelectedItemAtIndex:(NSInteger)index {
+    
+}
+
+- (void)categoryView:(JXCategoryBaseView *)categoryView didScrollSelectedItemAtIndex:(NSInteger)index {
+    
+}
+
+- (void)categoryView:(JXCategoryBaseView *)categoryView scrollingFromLeftIndex:(NSInteger)leftIndex toRightIndex:(NSInteger)rightIndex ratio:(CGFloat)ratio {
+    
+}
+
+- (void)setupCategoryView {
     NSArray *titles = [self getRandomTitles];
     NSUInteger count = titles.count;
     CGFloat categoryViewHeight = 64;
@@ -98,48 +152,6 @@
     }
     
     self.categoryView.contentScrollView = self.scrollView;
-}
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-//    VENClassifySearchViewController *vc = [[VENClassifySearchViewController alloc] init];
-//    [self presentViewController:vc animated:NO completion:nil];
-    
-    NSLog(@"搜索页面");
-    
-    return NO;
-}
-
-//这句代码必须加上
-- (BOOL)shouldAutomaticallyForwardAppearanceMethods {
-    return NO;
-}
-
-- (NSArray <NSString *> *)getRandomTitles {
-    NSMutableArray *titles = @[@"推荐", @"想玩", @"在玩"].mutableCopy;
-    NSMutableArray *resultArray = [NSMutableArray array];
-    for (int i = 0; i < titles.count; i++) {
-        [resultArray addObject:titles[i]];
-    }
-    return resultArray;
-}
-
-#pragma mark - JXCategoryViewDelegate
-
-- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-    //侧滑手势处理
-    self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
-}
-
-- (void)categoryView:(JXCategoryBaseView *)categoryView didClickSelectedItemAtIndex:(NSInteger)index {
-    
-}
-
-- (void)categoryView:(JXCategoryBaseView *)categoryView didScrollSelectedItemAtIndex:(NSInteger)index {
-    
-}
-
-- (void)categoryView:(JXCategoryBaseView *)categoryView scrollingFromLeftIndex:(NSInteger)leftIndex toRightIndex:(NSInteger)rightIndex ratio:(CGFloat)ratio {
-    
 }
 
 /*

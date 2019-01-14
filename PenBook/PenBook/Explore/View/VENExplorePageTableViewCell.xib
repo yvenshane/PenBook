@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -51,7 +51,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yug-mf-zQd">
-                                <rect key="frame" x="217" y="31.5" width="55" height="27"/>
+                                <rect key="frame" x="217" y="32" width="55" height="27"/>
                                 <color key="backgroundColor" red="0.31372549019607843" green="0.38039215686274508" blue="0.98431372549019602" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="6l8-Xi-v6b"/>
@@ -97,7 +97,7 @@
                                 <state key="selected" image="icon_zan_sel"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8J4-6R-uNg">
-                                <rect key="frame" x="73.5" y="338" width="73.5" height="16"/>
+                                <rect key="frame" x="73.5" y="338.5" width="73.5" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="oHD-HS-WcS"/>
                                 </constraints>
@@ -108,7 +108,7 @@
                                 <state key="selected" image="icon_like_sel"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjn-N0-SMJ">
-                                <rect key="frame" x="147" y="338" width="73.5" height="16"/>
+                                <rect key="frame" x="147" y="338.5" width="73.5" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="DXR-Pb-dT3"/>
                                 </constraints>
@@ -118,7 +118,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGe-ct-PGE">
-                                <rect key="frame" x="220.5" y="338" width="73.5" height="16"/>
+                                <rect key="frame" x="220.5" y="338.5" width="73.5" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="dqP-pz-WXN"/>
                                 </constraints>
@@ -175,6 +175,17 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="contentLabel" destination="LGi-AN-gHC" id="qim-Af-nAZ"/>
+                <outlet property="focusButton" destination="8J4-6R-uNg" id="oCu-Jg-IuA"/>
+                <outlet property="fucosButton" destination="yug-mf-zQd" id="Bht-L5-utT"/>
+                <outlet property="gameNameLabel" destination="HzR-q4-PRW" id="Wva-ro-HQe"/>
+                <outlet property="iconButton" destination="q9t-7c-lqx" id="mh0-L6-cim"/>
+                <outlet property="shareButton" destination="QGe-ct-PGE" id="58Y-h9-W0m"/>
+                <outlet property="talkButton" destination="pjn-N0-SMJ" id="4ft-29-raD"/>
+                <outlet property="userNameLabel" destination="xSf-7g-JRw" id="EaN-mk-aem"/>
+                <outlet property="zanButton" destination="1jk-EN-1Ax" id="Fli-JO-c9O"/>
+            </connections>
             <point key="canvasLocation" x="99" y="117"/>
         </tableViewCell>
     </objects>

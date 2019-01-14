@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *starView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView2;
 
+@property (nonatomic, copy) NSString *starCount;
+
 @end
 
 NS_ASSUME_NONNULL_END

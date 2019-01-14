@@ -12,6 +12,7 @@
 #import "VENFindPasswordViewController.h"
 
 @interface VENLoginViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -39,6 +40,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [cell.topButton setTitle:indexPath.row == 0 ? @"  手机" : @"  密码" forState:UIControlStateNormal];
     [cell.topButton setImage:[UIImage imageNamed:indexPath.row == 0 ? @"icon_phoneNumber" : @"icon_password"] forState:UIControlStateNormal];
     cell.bottomTextField.placeholder = indexPath.row == 0 ? @"请输入手机" : @"请输入密码";
+    cell.bottomTextField.keyboardType = indexPath.row == 0 ? UIKeyboardTypeNumberPad : UIKeyboardTypeDefault;
+    cell.bottomTextField.secureTextEntry = indexPath.row == 0 ? NO : YES;
     
     return cell;
 }
@@ -79,10 +82,54 @@ static NSString *cellIdentifier = @"cellIdentifier";
     loginButton.backgroundColor = UIColorFromRGB(0x5061FB);
     [loginButton setTitle:@"登录" forState:UIControlStateNormal];
     [loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [loginButton addTarget:self action:@selector(loginButtonClick) forControlEvents:UIControlEventTouchUpInside];
     loginButton.titleLabel.font = [UIFont systemFontOfSize:16.0f];
     loginButton.layer.cornerRadius = 24.0f;
     loginButton.layer.masksToBounds = YES;
     [footerView addSubview:loginButton];
+    
+    _tableView = tableView;
+}
+
+#pragma mark - 登录
+- (void)loginButtonClick {
+    NSLog(@"登录");
+    
+    VENLoginTableViewCell *cell = (VENLoginTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:cell.bottomTextField.text] || cell.bottomTextField.text.length != 11) {
+        [[VENMBProgressHUDManager sharedManager] showText:@"请输入手机"];
+        return;
+    }
+    
+    VENLoginTableViewCell *cell2 = (VENLoginTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:cell2.bottomTextField.text]) {
+        [[VENMBProgressHUDManager sharedManager] showText:@"请输入密码"];
+        return;
+    }
+    
+    NSDictionary *params = @{@"ip" : [[VENNetworkTool sharedManager] getIPAddress],
+                             @"user" : cell.bottomTextField.text,
+                             @"pass" : cell2.bottomTextField.text};
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordlogin/login" params:params showLoading:YES successBlock:^(id response) {
+        
+        if ([response[@"ret"] integerValue] == 1) {
+            
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            
+            NSDictionary *loginSuccess = @{@"userid" : response[@"userid"],
+                                           @"username" : response[@"username"]};
+            
+            [userDefaults setObject:loginSuccess forKey:@"Login"];
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+            
+        } else {
+            return;
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (void)findPasswordButtonClick {
