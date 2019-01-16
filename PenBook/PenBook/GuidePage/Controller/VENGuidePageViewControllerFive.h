@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VENGuidePageViewControllerFive : VENBaseViewController
+@property (nonatomic, copy) NSString *types;
 
 @end
 
 NS_ASSUME_NONNULL_END
+

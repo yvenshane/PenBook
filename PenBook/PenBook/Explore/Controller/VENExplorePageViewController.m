@@ -12,17 +12,25 @@
 #import "VENGuidePageViewControllerTwo.h"
 #import "VENExplorePageModel.h"
 
-#import "VENGuidePageViewControllerFive.h"
+
+
+#import "VENGuidePageViewControllerFour.h"
+
+
+
 
 @interface VENExplorePageViewController () <JXCategoryViewDelegate>
 @property (nonatomic, strong) JXCategoryTitleView *categoryView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray <VENExplorePageSubviewsController *> *listVCArray;
+
+@property (nonatomic, strong) NSMutableArray *navIDMuArr;
 @property (nonatomic, strong) NSMutableArray *navTitlesMuArr;
-@property (nonatomic, copy) NSArray *dataArr;
+@property (nonatomic, strong) NSMutableArray *selectedItemAtIndexMuArr;
 
 @end
 
+static CGFloat const categoryViewHeight = 70;
 @implementation VENExplorePageViewController
 
 - (void)viewDidLoad {
@@ -33,40 +41,32 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"first"]) {
-        VENGuidePageViewControllerFive *vc = [[VENGuidePageViewControllerFive alloc] init];
+        VENGuidePageViewControllerFour *vc = [[VENGuidePageViewControllerFour alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:NO];
     } else {
-        
-        
-        if (![[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
-            
-            [self loadDataWith:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]}];
-        }
-        
-        [self setupNavigationItemLeftBarButtonItem];
-        [self setupNavigationItemRightBarButtonItem];
+
     }
+    
+    [self loadData];
+    
+    [self setupNavigationItemLeftBarButtonItem];
+    [self setupNavigationItemRightBarButtonItem];
 }
 
-- (void)loadDataWith:(NSDictionary *)params {
+- (void)loadData {
     
     [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamenavig" params:nil showLoading:NO successBlock:^(id response) {
         
-        for (NSDictionary *dict in response) {
-            [self.navTitlesMuArr addObject:dict[@"game"]];
+        if (response[@"ret"]) {
+            for (NSDictionary *dict in response[@"head"]) {
+                [self.navTitlesMuArr addObject:dict[@"game"]];
+                [self.navIDMuArr addObject:dict[@"id"]];
+            }
+            
+            [self setupCategoryView];
+            [self setupSubViews];
         }
-        
-    } failureBlock:^(NSError *error) {
-        
-    }];
-    
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamearticle" params:params showLoading:NO successBlock:^(id response) {
-        
-        NSArray *dataArr = [NSArray yy_modelArrayWithClass:[VENExplorePageModel class] json:response[@"arr"]];
-        self.dataArr = dataArr;
-        
-        [self setupCategoryView];
         
     } failureBlock:^(NSError *error) {
         
@@ -83,6 +83,11 @@
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
     //侧滑手势处理
     self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
+    
+    if (![self.selectedItemAtIndexMuArr containsObject:[NSString stringWithFormat:@"%ld", (long)index]]) {
+        [self.listVCArray[index].tableView.mj_header beginRefreshing];
+        [self.selectedItemAtIndexMuArr addObject:[NSString stringWithFormat:@"%ld", (long)index]];
+    }
 }
 
 - (void)categoryView:(JXCategoryBaseView *)categoryView didClickSelectedItemAtIndex:(NSInteger)index {
@@ -98,24 +103,10 @@
 }
 
 - (void)setupCategoryView {
-    NSArray *titles = self.navTitlesMuArr;
-    NSUInteger count = titles.count;
-    CGFloat categoryViewHeight = 70;
-    CGFloat width = kMainScreenWidth;
-    CGFloat height = kMainScreenHeight - statusNavHeight - categoryViewHeight;
-    
-    self.listVCArray = [NSMutableArray array];
-    for (int i = 0; i < count; i ++) {
-        VENExplorePageSubviewsController *listVC = [[VENExplorePageSubviewsController alloc] init];
-        listVC.dataArr = self.dataArr;
-        listVC.view.frame = CGRectMake(i*width, 0, width, height);
-        [self.listVCArray addObject:listVC];
-    }
-    
     self.categoryView = [[JXCategoryTitleView alloc] init];
     self.categoryView.frame = CGRectMake(0, 0, kMainScreenWidth, categoryViewHeight);
     self.categoryView.delegate = self;
-    self.categoryView.titles = titles;
+    self.categoryView.titles = self.navTitlesMuArr;
     self.categoryView.titleColor = UIColorFromRGB(0xABABAB);
     self.categoryView.titleFont = [UIFont systemFontOfSize:14.0f];
     self.categoryView.titleSelectedColor = COLOR_THEME;
@@ -129,18 +120,31 @@
     self.categoryView.indicators = @[backgroundView];
     
     [self.view addSubview:self.categoryView];
+}
+
+- (void)setupSubViews {
+        NSUInteger count = self.navTitlesMuArr.count;
+        CGFloat width = kMainScreenWidth;
+        CGFloat height = kMainScreenHeight - statusNavHeight - categoryViewHeight;
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, categoryViewHeight,  width, height)];
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(width*count, height);
-    [self.view addSubview:self.scrollView];
+        for (int i = 0; i < count; i ++) {
+            VENExplorePageSubviewsController *listVC = [[VENExplorePageSubviewsController alloc] init];
+            listVC.gamenid = self.navIDMuArr[i];
+            listVC.view.frame = CGRectMake(i*width, 0, width, height);
+            [self.listVCArray addObject:listVC];
+        }
     
-    for (int i = 0; i < count; i ++) {
-        VENExplorePageSubviewsController *listVC = self.listVCArray[i];
-        [self.scrollView addSubview:listVC.view];
-    }
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, categoryViewHeight,  width, height)];
+        self.scrollView.pagingEnabled = YES;
+        self.scrollView.contentSize = CGSizeMake(width*count, height);
+        [self.view addSubview:self.scrollView];
     
-    self.categoryView.contentScrollView = self.scrollView;
+        for (int i = 0; i < count; i ++) {
+            VENExplorePageSubviewsController *listVC = self.listVCArray[i];
+            [self.scrollView addSubview:listVC.view];
+        }
+    
+        self.categoryView.contentScrollView = self.scrollView;
 }
 
 - (void)setupNavigationItemRightBarButtonItem {
@@ -166,11 +170,32 @@
     self.navigationItem.leftBarButtonItem = barButton;
 }
 
+- (NSMutableArray *)selectedItemAtIndexMuArr {
+    if (_selectedItemAtIndexMuArr == nil) {
+        _selectedItemAtIndexMuArr = [NSMutableArray arrayWithArray:@[@"0"]];
+    }
+    return _selectedItemAtIndexMuArr;
+}
+
+- (NSMutableArray *)listVCArray {
+    if (_listVCArray == nil) {
+        _listVCArray = [NSMutableArray array];
+    }
+    return _listVCArray;
+}
+
 - (NSMutableArray *)navTitlesMuArr {
     if (_navTitlesMuArr == nil) {
         _navTitlesMuArr = [NSMutableArray array];
     }
     return _navTitlesMuArr;
+}
+
+- (NSMutableArray *)navIDMuArr {
+    if (_navIDMuArr == nil) {
+        _navIDMuArr = [NSMutableArray array];
+    }
+    return _navIDMuArr;
 }
 
 /*

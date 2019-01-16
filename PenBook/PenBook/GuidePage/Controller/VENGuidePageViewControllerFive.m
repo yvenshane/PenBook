@@ -9,10 +9,12 @@
 #import "VENGuidePageViewControllerFive.h"
 #import "VENGuidePageViewControllerOne.h"
 #import "VENMinePagemMyGameTableViewCell.h"
+#import "VENGuidePageFiveModel.h"
 
 @interface VENGuidePageViewControllerFive () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIButton *finishButon;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, copy) NSArray *dataArr;
 
 @end
 
@@ -30,30 +32,62 @@ static NSString *cellIdentifier = @"cellIdentifier";
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"VENMinePagemMyGameTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamerecommend" params:@{@"typeid" : self.types} showLoading:YES successBlock:^(id response) {
+        
+        if ([response[@"ret"] integerValue] == 1) {
+            NSArray *dataArr = [NSArray yy_modelArrayWithClass:[VENGuidePageFiveModel class] json:response[@"game"]];
+            
+            self.dataArr = dataArr;
+            
+            [self.tableView reloadData];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 7;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VENMinePagemMyGameTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
+    VENGuidePageFiveModel *model = self.dataArr[indexPath.row];
     
+    cell.topLabel.text = model.name;
+    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.image]];
+    cell.bottomLabel.text = model.heat;
+    cell.starCount = model.star;
     
-    cell.starCount = [NSString stringWithFormat:@"%u", arc4random_uniform(5) + 1];
-    
-    
-    
-    cell.imageView2.hidden = YES;
+    cell.rightButton.tag = indexPath.row;
     cell.rightButton.backgroundColor = UIColorFromRGB(0xFBC82E);
     [cell.rightButton setTitle:@"下载" forState:UIControlStateNormal];
-    
-    cell.iconImageView.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
-    
+    [cell.rightButton addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    cell.imageView2.hidden = YES;
     
     return cell;
+}
+
+- (void)rightButtonClick:(UIButton *)button {
+    VENGuidePageFiveModel *model = self.dataArr[button.tag];
+    
+    NSDictionary *params = @{@"idfa" : [[VENNetworkTool sharedManager] getIDFA],
+                             @"ip" : [[VENNetworkTool sharedManager] getIPAddress],
+                             @"callback" : [NSString stringWithFormat:@"%@?idfa={%@}&ip={%@}", model.callback, [[VENNetworkTool sharedManager] getIDFA], [[VENNetworkTool sharedManager] getIPAddress]]};
+
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:[model.click substringFromIndex:23] params:params showLoading:YES successBlock:^(id response) {
+        
+        if ([response[@"ret"] integerValue] == 0) {
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", model.ituuesid]]];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

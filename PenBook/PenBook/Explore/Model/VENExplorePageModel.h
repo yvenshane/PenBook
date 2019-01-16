@@ -23,6 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *uptime;
 @property (nonatomic, copy) NSString *give_state;
 @property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *headpic;
+@property (nonatomic, copy) NSString *collect_state;
+
+@property (nonatomic, copy) NSArray *head;
+@property (nonatomic, copy) NSArray *image;
 
 //image => [
 //          arid=>所属文章id 和上面文章id是同一个值

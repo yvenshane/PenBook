@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,retain) UIColor* backgroundColorSelected;
 @property (nonatomic,retain) UIColor* backgroundColorNormal;
 
+@property (nonatomic, strong) NSMutableArray *buttonsMuArr;
+
 @end
 
 NS_ASSUME_NONNULL_END

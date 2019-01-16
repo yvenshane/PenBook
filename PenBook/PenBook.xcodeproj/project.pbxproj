@@ -121,6 +121,7 @@
 		2C0110AE21E2105200B8FDC5 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C01103621E2105200B8FDC5 /* UIImageView+WebCache.m */; };
 		2C0110AF21E2105200B8FDC5 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C01103921E2105200B8FDC5 /* UIView+WebCacheOperation.m */; };
 		2C0110B021E2105200B8FDC5 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C01103D21E2105200B8FDC5 /* UIButton+WebCache.m */; };
+		2C20F6C621EEC4E8004AF5AF /* VENGuidePageFiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6C521EEC4E8004AF5AF /* VENGuidePageFiveModel.m */; };
 		2C2E2C9A21E4418B00460B7E /* VENGuidePageViewControllerTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */; };
 		2C2E2C9B21E4418B00460B7E /* VENGuidePageViewControllerTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */; };
 		2C2E2CA221E444B800460B7E /* VENGuidePageViewControllerThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2CA021E444B800460B7E /* VENGuidePageViewControllerThree.m */; };
@@ -418,6 +419,8 @@
 		2C01103C21E2105200B8FDC5 /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MultiFormat.h"; sourceTree = "<group>"; };
 		2C01103D21E2105200B8FDC5 /* UIButton+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
 		2C01103E21E2105200B8FDC5 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
+		2C20F6C421EEC4E8004AF5AF /* VENGuidePageFiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENGuidePageFiveModel.h; sourceTree = "<group>"; };
+		2C20F6C521EEC4E8004AF5AF /* VENGuidePageFiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENGuidePageFiveModel.m; sourceTree = "<group>"; };
 		2C2E2C9721E4418B00460B7E /* VENGuidePageViewControllerTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENGuidePageViewControllerTwo.h; sourceTree = "<group>"; };
 		2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENGuidePageViewControllerTwo.m; sourceTree = "<group>"; };
 		2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENGuidePageViewControllerTwo.xib; sourceTree = "<group>"; };
@@ -1091,6 +1094,15 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		2C20F6C721EEC4EC004AF5AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2C20F6C421EEC4E8004AF5AF /* VENGuidePageFiveModel.h */,
+				2C20F6C521EEC4E8004AF5AF /* VENGuidePageFiveModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2C2E2CAE21E48CBA00460B7E /* SharedManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1467,6 +1479,7 @@
 		2C7C817721E3A0DB004BE9A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2C20F6C721EEC4EC004AF5AF /* Model */,
 				2C7C817821E3A11D004BE9A7 /* VENGuidePageViewControllerOne.h */,
 				2C7C817921E3A11D004BE9A7 /* VENGuidePageViewControllerOne.m */,
 				2C7C817A21E3A11D004BE9A7 /* VENGuidePageViewControllerOne.xib */,
@@ -1692,6 +1705,7 @@
 				2C01108F21E2105200B8FDC5 /* UIImageView+AFNetworking.m in Sources */,
 				2C7C816821E37ECF004BE9A7 /* VENMinePagemMyFocusViewController.m in Sources */,
 				2C01108521E2105200B8FDC5 /* IQKeyboardManager.m in Sources */,
+				2C20F6C621EEC4E8004AF5AF /* VENGuidePageFiveModel.m in Sources */,
 				2C01108E21E2105200B8FDC5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				2C51CC9621C755D9008B238E /* VENTabBarController.m in Sources */,
 				2C01107D21E2105200B8FDC5 /* YYClassInfo.m in Sources */,

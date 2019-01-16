@@ -35,18 +35,18 @@ static dispatch_once_t onceToken;
     [view addSubview:progressHUD];
     [progressHUD show:YES];
     
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:progressHUD action:@selector(progressHUDTapEvent:)];
-    tap.numberOfTapsRequired = 1;
-    
-    [progressHUD addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:progressHUD action:@selector(progressHUDTapEvent:)];
+//    tap.numberOfTapsRequired = 1;
+//
+//    [progressHUD addGestureRecognizer:tap];
 }
 
-- (void)progressHUDTapEvent:(id)sender {
-    UITapGestureRecognizer *tap = sender;
-    MBProgressHUD *progressHUD = (MBProgressHUD *)tap.view;
-    progressHUD.removeFromSuperViewOnHide = YES;
-    [progressHUD hide:YES];
-}
+//- (void)progressHUDTapEvent:(id)sender {
+//    UITapGestureRecognizer *tap = sender;
+//    MBProgressHUD *progressHUD = (MBProgressHUD *)tap.view;
+//    progressHUD.removeFromSuperViewOnHide = YES;
+//    [progressHUD hide:YES];
+//}
 
 - (void)removeLoading {
     [MBProgressHUD hideHUDForView:[[UIApplication sharedApplication] keyWindow] animated:YES];

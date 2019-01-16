@@ -82,7 +82,7 @@ static dispatch_once_t onceToken;
                 [self hideLoading:isShow];
                 NSLog(@"%@", responseObject);
                 
-//                [[VENMBProgressHUDManager sharedManager] showText:responseObject[@"msg"]];
+                [[VENMBProgressHUDManager sharedManager] showText:responseObject[@"msg"]];
                 
                 success(responseObject);
             } failure:^(NSURLSessionTask *operation, NSError *error) {

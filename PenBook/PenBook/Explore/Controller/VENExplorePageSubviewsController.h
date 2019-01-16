@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface VENExplorePageSubviewsController : UIViewController
-@property (nonatomic, copy) NSArray *dataArr;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, copy) NSString *gamenid;
 
 @end

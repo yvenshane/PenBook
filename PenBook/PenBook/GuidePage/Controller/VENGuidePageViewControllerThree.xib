@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VENGuidePageViewControllerThree">
             <connections>
+                <outlet property="backgroundView" destination="CXA-eO-vAH" id="uZU-xb-4In"/>
                 <outlet property="nextButton" destination="8xM-x9-zMo" id="6G8-Aa-6cZ"/>
                 <outlet property="searchButton" destination="iuB-27-dXQ" id="STH-GA-NrI"/>
                 <outlet property="searchTextField" destination="hm5-Rg-wYk" id="6P7-TB-Wpr"/>
@@ -93,6 +94,10 @@
                         <action selector="nextButtonClick:" destination="-1" eventType="touchUpInside" id="YZ7-OA-ywF"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXA-eO-vAH">
+                    <rect key="frame" x="44" y="223" width="287" height="276"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -100,15 +105,19 @@
                 <constraint firstItem="1al-bv-6NN" firstAttribute="top" secondItem="iuB-27-dXQ" secondAttribute="bottom" id="6B5-9e-4oz"/>
                 <constraint firstItem="nFK-7e-JsI" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="9Vs-3r-Wqz"/>
                 <constraint firstItem="O0J-so-xhd" firstAttribute="top" secondItem="IZi-kK-udA" secondAttribute="bottom" constant="50" id="Jmn-dR-nvF"/>
+                <constraint firstItem="8xM-x9-zMo" firstAttribute="top" secondItem="CXA-eO-vAH" secondAttribute="bottom" constant="75" id="KFS-zu-n7l"/>
                 <constraint firstItem="1al-bv-6NN" firstAttribute="top" secondItem="hm5-Rg-wYk" secondAttribute="bottom" id="Knf-VH-cCS"/>
                 <constraint firstItem="IZi-kK-udA" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Lf1-hU-32s"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="CXA-eO-vAH" secondAttribute="trailing" constant="44" id="LrL-7i-Kk2"/>
                 <constraint firstItem="IZi-kK-udA" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="MFq-kI-cWn"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="iuB-27-dXQ" secondAttribute="trailing" constant="60" id="MSU-3e-hQ4"/>
+                <constraint firstItem="CXA-eO-vAH" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="44" id="PEk-c9-aiJ"/>
                 <constraint firstAttribute="trailing" secondItem="1al-bv-6NN" secondAttribute="trailing" constant="60" id="Rzo-Sx-ZXn"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="8xM-x9-zMo" secondAttribute="bottom" constant="45" id="XT3-5U-Cds"/>
                 <constraint firstItem="nFK-7e-JsI" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Yhb-uQ-z1A"/>
                 <constraint firstItem="O0J-so-xhd" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="60" id="d8J-Ry-h2m"/>
                 <constraint firstItem="8xM-x9-zMo" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dh6-m2-wEj"/>
+                <constraint firstItem="CXA-eO-vAH" firstAttribute="top" secondItem="1al-bv-6NN" secondAttribute="bottom" constant="34" id="eyt-pw-BAe"/>
                 <constraint firstItem="1al-bv-6NN" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="60" id="hpY-cv-5tC"/>
                 <constraint firstItem="hm5-Rg-wYk" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="60" id="k2T-nB-XQb"/>
                 <constraint firstItem="nFK-7e-JsI" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="6" id="mYc-cM-Jcg"/>

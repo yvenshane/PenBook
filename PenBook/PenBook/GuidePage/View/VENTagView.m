@@ -87,7 +87,7 @@
 - (void)createTagButton{
     
     // 按钮高度
-    CGFloat btnH = 28;
+    CGFloat btnH = 50;
     // 距离左边距
     CGFloat leftX = 6;
     // 距离上边距
@@ -105,9 +105,9 @@
         btn.frame = CGRectMake(marginX + leftX, topY, 100, btnH);
         btn.tag = 100+i;
         // 默认选中第一个
-        if (i == 0) {
-            btn.selected = YES;
-        }
+//        if (i == 0) {
+//            btn.selected = YES;
+//        }
         
         // 按钮文字
         [btn setTitle:_tagArray[i] forState:UIControlStateNormal];
@@ -137,7 +137,7 @@
         [btn setBackgroundImage:[self imageWithColor:self.backgroundColorSelected] forState:UIControlStateSelected];
         
         // 圆角
-        btn.layer.cornerRadius = btn.frame.size.height / 2.f;
+        btn.layer.cornerRadius = 6.0f;
         btn.layer.masksToBounds = YES;
         // 边框
         btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -165,15 +165,18 @@
         btn.frame = frame;
         
         //----- 选中事件
-        [btn addTarget:self action:@selector(selectdButton:) forControlEvents:UIControlEventTouchUpInside];
+//        [btn addTarget:self action:@selector(selectdButton:) forControlEvents:UIControlEventTouchUpInside];
         
         [self addSubview:btn];
         
         leftX += btn.frame.size.width + marginX;
+        
+        btn.tag = i;
+        [self.buttonsMuArr addObject:btn];
     }
     
     // 检测按钮状态，最少选中一个
-    [self checkButtonState];
+//    [self checkButtonState];
 }
 
 // 设置按钮的边距、间隙
@@ -235,13 +238,20 @@
 
 #pragma mark - Event
 
-// 标签按钮点击事件
-- (void)selectdButton:(UIButton*)btn{
-    
-    btn.selected = !btn.selected;
-    
-    // 检测按钮状态，最少选中一个
-    [self checkButtonState];
+//// 标签按钮点击事件
+//- (void)selectdButton:(UIButton*)btn{
+//
+//    btn.selected = !btn.selected;
+//
+//    // 检测按钮状态，最少选中一个
+//    [self checkButtonState];
+//}
+
+- (NSMutableArray *)buttonsMuArr {
+    if (_buttonsMuArr == nil) {
+        _buttonsMuArr = [NSMutableArray array];
+    }
+    return _buttonsMuArr;
 }
 
 /*

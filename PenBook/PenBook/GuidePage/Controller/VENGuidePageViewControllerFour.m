@@ -12,8 +12,8 @@
 @interface VENGuidePageViewControllerFour ()
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UIView *backgroundView;
-@property (nonatomic, copy) NSArray *dataArr;
 @property (nonatomic, strong) NSMutableArray *idMuArr;
+@property (nonatomic, copy) NSArray *dataArr;
 
 @end
 
@@ -27,28 +27,31 @@
     self.nextButton.layer.cornerRadius = 24.0f;
     self.nextButton.layer.masksToBounds = YES;
     
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gametype" params:nil showLoading:YES successBlock:^(NSArray *response) {
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gametype" params:nil showLoading:YES successBlock:^(id response) {
         
-        self.dataArr = response;
-        
-        for (NSInteger i = 0; i < self.dataArr.count; i++) {
-            int row = i / 3;
-            int col = i % 3;
+        if ([response[@"ret"] integerValue] == 1) {
             
-            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(col * 80 + col * 20, row * 80 + row * 20, 80, 80)];
-            button.tag = i + 1000;
-            button.backgroundColor = [UIColor whiteColor];
-            [button setTitle:self.dataArr[i][@"name"] forState:UIControlStateNormal];
-            [button setTitleColor:UIColorFromRGB(0X5061FB) forState:UIControlStateNormal];
-            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-            button.titleLabel.font = [UIFont systemFontOfSize:19.0f];
+            self.dataArr = response[@"head"];
             
-            button.layer.cornerRadius = 10.0f;
-            button.layer.masksToBounds = YES;
-            button.layer.borderColor = UIColorFromRGB(0x5061FB).CGColor;
-            button.layer.borderWidth = 1.0f;
-            [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-            [self.backgroundView addSubview:button];
+            for (NSInteger i = 0; i < self.dataArr.count; i++) {
+                int row = i / 3;
+                int col = i % 3;
+                
+                UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(col * 80 + col * 20, row * 80 + row * 20, 80, 80)];
+                button.tag = i + 1000;
+                button.backgroundColor = [UIColor whiteColor];
+                [button setTitle:self.dataArr[i][@"name"] forState:UIControlStateNormal];
+                [button setTitleColor:UIColorFromRGB(0X5061FB) forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+                button.titleLabel.font = [UIFont systemFontOfSize:19.0f];
+                
+                button.layer.cornerRadius = 10.0f;
+                button.layer.masksToBounds = YES;
+                button.layer.borderColor = UIColorFromRGB(0x5061FB).CGColor;
+                button.layer.borderWidth = 1.0f;
+                [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+                [self.backgroundView addSubview:button];
+            }
         }
         
     } failureBlock:^(NSError *error) {
@@ -77,18 +80,16 @@
         return;
     }
     
-    NSDictionary *params = @{@"types" : @{@"0" : @"0"},
+    NSDictionary *params = @{@"types" : [self.idMuArr componentsJoinedByString:@","],
                              @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
     
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodPost path:@"Recordkernel/gametypeadd" params:params showLoading:YES successBlock:^(id response) {
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gametypeadd" params:params showLoading:YES successBlock:^(id response) {
         
-//        if ([response[@"ret"] integerValue] == 1) {
-//            VENGuidePageViewControllerFive *vc = [[VENGuidePageViewControllerFive alloc] init];
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-        
-        VENGuidePageViewControllerFive *vc = [[VENGuidePageViewControllerFive alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([response[@"ret"] integerValue] == 1) {
+            VENGuidePageViewControllerFive *vc = [[VENGuidePageViewControllerFive alloc] init];
+            vc.types = [self.idMuArr componentsJoinedByString:@","];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
         
     } failureBlock:^(NSError *error) {
         
