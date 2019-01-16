@@ -10,6 +10,7 @@
 #import "VENMinePagemMyFansTableViewCell.h"
 
 @interface VENMinePagemMyFocusViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -23,6 +24,18 @@ static NSString *cellIdentifier = @"cellIdentifier";
     self.navigationItem.title = @"我的关注";
     
     [self setupTableView];
+    
+    [self.tableView.mj_header beginRefreshing];
+}
+
+- (void)loadData {
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"/Recordkernel/gamemyfollow" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:YES successBlock:^(id response) {
+        
+        [self.tableView reloadData];
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -52,6 +65,16 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [tableView registerNib:[UINib nibWithNibName:@"VENMinePagemMyFansTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:tableView];
     
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self loadData];
+    }];
+    
+    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+    }];
+    
+    _tableView = tableView;
 }
 
 /*

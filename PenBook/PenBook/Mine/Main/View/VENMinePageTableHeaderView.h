@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *myFocusButton;
 @property (weak, nonatomic) IBOutlet UIButton *myGameButton;
 @property (weak, nonatomic) IBOutlet UIView *threeButtonBackgroundView;
-@property (weak, nonatomic) IBOutlet UIView *shadowView;
+
+@property (weak, nonatomic) IBOutlet UIView *gameView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *gameViewLayoutConstraint;
 
 @end

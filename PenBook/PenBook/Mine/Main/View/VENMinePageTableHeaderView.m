@@ -23,6 +23,12 @@
     
     self.myGameButton.layer.cornerRadius = 12.0f;
     self.myGameButton.layer.masksToBounds = YES;
+    
+    self.otherButton.layer.cornerRadius = 10.0f;
+    self.otherButton.layer.masksToBounds = YES;
+    
+    self.iconImageView.layer.cornerRadius = 74 / 2;
+    self.iconImageView.layer.masksToBounds = YES;
 }
 
 @end

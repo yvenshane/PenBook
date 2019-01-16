@@ -122,6 +122,13 @@
 		2C0110AF21E2105200B8FDC5 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C01103921E2105200B8FDC5 /* UIView+WebCacheOperation.m */; };
 		2C0110B021E2105200B8FDC5 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C01103D21E2105200B8FDC5 /* UIButton+WebCache.m */; };
 		2C20F6C621EEC4E8004AF5AF /* VENGuidePageFiveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6C521EEC4E8004AF5AF /* VENGuidePageFiveModel.m */; };
+		2C20F6CF21EF0776004AF5AF /* VENExplorePageDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6CE21EF0776004AF5AF /* VENExplorePageDetailsViewController.m */; };
+		2C20F6D321EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6D121EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.m */; };
+		2C20F6D421EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20F6D221EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.xib */; };
+		2C20F6D821EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6D621EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.m */; };
+		2C20F6D921EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20F6D721EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.xib */; };
+		2C20F6DD21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6DB21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.m */; };
+		2C20F6DE21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20F6DC21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib */; };
 		2C2E2C9A21E4418B00460B7E /* VENGuidePageViewControllerTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */; };
 		2C2E2C9B21E4418B00460B7E /* VENGuidePageViewControllerTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */; };
 		2C2E2CA221E444B800460B7E /* VENGuidePageViewControllerThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2CA021E444B800460B7E /* VENGuidePageViewControllerThree.m */; };
@@ -421,6 +428,17 @@
 		2C01103E21E2105200B8FDC5 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
 		2C20F6C421EEC4E8004AF5AF /* VENGuidePageFiveModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENGuidePageFiveModel.h; sourceTree = "<group>"; };
 		2C20F6C521EEC4E8004AF5AF /* VENGuidePageFiveModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENGuidePageFiveModel.m; sourceTree = "<group>"; };
+		2C20F6CD21EF0776004AF5AF /* VENExplorePageDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENExplorePageDetailsViewController.h; sourceTree = "<group>"; };
+		2C20F6CE21EF0776004AF5AF /* VENExplorePageDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENExplorePageDetailsViewController.m; sourceTree = "<group>"; };
+		2C20F6D021EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENExplorePageDetailsTableViewCell.h; sourceTree = "<group>"; };
+		2C20F6D121EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENExplorePageDetailsTableViewCell.m; sourceTree = "<group>"; };
+		2C20F6D221EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENExplorePageDetailsTableViewCell.xib; sourceTree = "<group>"; };
+		2C20F6D521EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENExplorePageDetailsTableViewCellTwo.h; sourceTree = "<group>"; };
+		2C20F6D621EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENExplorePageDetailsTableViewCellTwo.m; sourceTree = "<group>"; };
+		2C20F6D721EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENExplorePageDetailsTableViewCellTwo.xib; sourceTree = "<group>"; };
+		2C20F6DA21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENExplorePageDetailsTableViewCellThree.h; sourceTree = "<group>"; };
+		2C20F6DB21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENExplorePageDetailsTableViewCellThree.m; sourceTree = "<group>"; };
+		2C20F6DC21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENExplorePageDetailsTableViewCellThree.xib; sourceTree = "<group>"; };
 		2C2E2C9721E4418B00460B7E /* VENGuidePageViewControllerTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENGuidePageViewControllerTwo.h; sourceTree = "<group>"; };
 		2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENGuidePageViewControllerTwo.m; sourceTree = "<group>"; };
 		2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENGuidePageViewControllerTwo.xib; sourceTree = "<group>"; };
@@ -1103,6 +1121,58 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		2C20F6C821EF0719004AF5AF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2C51CC9A21C75ABB008B238E /* Model */,
+				2C51CC9B21C75ABB008B238E /* View */,
+				2C51CC9921C75ABB008B238E /* Controller */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		2C20F6C921EF0736004AF5AF /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				2C20F6CC21EF0752004AF5AF /* Model */,
+				2C20F6CB21EF0752004AF5AF /* View */,
+				2C20F6CA21EF0752004AF5AF /* Controller */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		2C20F6CA21EF0752004AF5AF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2C20F6CD21EF0776004AF5AF /* VENExplorePageDetailsViewController.h */,
+				2C20F6CE21EF0776004AF5AF /* VENExplorePageDetailsViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		2C20F6CB21EF0752004AF5AF /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2C20F6D021EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.h */,
+				2C20F6D121EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.m */,
+				2C20F6D221EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.xib */,
+				2C20F6D521EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.h */,
+				2C20F6D621EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.m */,
+				2C20F6D721EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.xib */,
+				2C20F6DA21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.h */,
+				2C20F6DB21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.m */,
+				2C20F6DC21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2C20F6CC21EF0752004AF5AF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2C2E2CAE21E48CBA00460B7E /* SharedManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1288,9 +1358,8 @@
 		2C51CC9821C75ABB008B238E /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				2C51CC9A21C75ABB008B238E /* Model */,
-				2C51CC9B21C75ABB008B238E /* View */,
-				2C51CC9921C75ABB008B238E /* Controller */,
+				2C20F6C821EF0719004AF5AF /* Main */,
+				2C20F6C921EF0736004AF5AF /* Details */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -1358,12 +1427,12 @@
 		2C51CC9F21C75ABB008B238E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2CF5D8AE21E253150059883E /* VENMineTableViewCell.h */,
-				2CF5D8AF21E253150059883E /* VENMineTableViewCell.m */,
-				2CF5D8B021E253150059883E /* VENMineTableViewCell.xib */,
 				2CF5D8BA21E25D5C0059883E /* VENMinePageTableHeaderView.h */,
 				2CF5D8BB21E25D5C0059883E /* VENMinePageTableHeaderView.m */,
 				2CF5D8BD21E25D660059883E /* VENMinePageTableHeaderView.xib */,
+				2CF5D8AE21E253150059883E /* VENMineTableViewCell.h */,
+				2CF5D8AF21E253150059883E /* VENMineTableViewCell.m */,
+				2CF5D8B021E253150059883E /* VENMineTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1480,9 +1549,6 @@
 			isa = PBXGroup;
 			children = (
 				2C20F6C721EEC4EC004AF5AF /* Model */,
-				2C7C817821E3A11D004BE9A7 /* VENGuidePageViewControllerOne.h */,
-				2C7C817921E3A11D004BE9A7 /* VENGuidePageViewControllerOne.m */,
-				2C7C817A21E3A11D004BE9A7 /* VENGuidePageViewControllerOne.xib */,
 				2C2E2C9721E4418B00460B7E /* VENGuidePageViewControllerTwo.h */,
 				2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */,
 				2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */,
@@ -1495,6 +1561,9 @@
 				2C2E2CA921E4481200460B7E /* VENGuidePageViewControllerFive.h */,
 				2C2E2CAA21E4481200460B7E /* VENGuidePageViewControllerFive.m */,
 				2C2E2CAB21E4481300460B7E /* VENGuidePageViewControllerFive.xib */,
+				2C7C817821E3A11D004BE9A7 /* VENGuidePageViewControllerOne.h */,
+				2C7C817921E3A11D004BE9A7 /* VENGuidePageViewControllerOne.m */,
+				2C7C817A21E3A11D004BE9A7 /* VENGuidePageViewControllerOne.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1632,6 +1701,7 @@
 				2C7C816521E377AA004BE9A7 /* VENMinePagemMyFansTableViewCell.xib in Resources */,
 				2C51CC8421C74EE3008B238E /* LaunchScreen.storyboard in Resources */,
 				2CF5D8B221E253150059883E /* VENMineTableViewCell.xib in Resources */,
+				2C20F6D421EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.xib in Resources */,
 				2C42089B21E63BAD0033E030 /* VENRegisterTableViewCell.xib in Resources */,
 				2C51CC8121C74EE3008B238E /* Assets.xcassets in Resources */,
 				2C7C817321E39B95004BE9A7 /* VENMinePagemMyGameTableViewCell.xib in Resources */,
@@ -1640,9 +1710,11 @@
 				2C2E2C9B21E4418B00460B7E /* VENGuidePageViewControllerTwo.xib in Resources */,
 				2C2E2CAD21E4481300460B7E /* VENGuidePageViewControllerFive.xib in Resources */,
 				2C2E2CA821E447A500460B7E /* VENGuidePageViewControllerFour.xib in Resources */,
+				2C20F6D921EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.xib in Resources */,
 				2C2E2CA321E444B800460B7E /* VENGuidePageViewControllerThree.xib in Resources */,
 				2C01104121E2105200B8FDC5 /* MJRefresh.bundle in Resources */,
 				2CF5D8BE21E25D660059883E /* VENMinePageTableHeaderView.xib in Resources */,
+				2C20F6DE21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib in Resources */,
 				2C42089021E632970033E030 /* VENLoginTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1715,6 +1787,7 @@
 				2C01105021E2105200B8FDC5 /* MJRefreshBackFooter.m in Sources */,
 				2C01105221E2105200B8FDC5 /* MJRefreshComponent.m in Sources */,
 				2C01109C21E2105200B8FDC5 /* SDCycleScrollView.m in Sources */,
+				2C20F6D321EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.m in Sources */,
 				2C0110AF21E2105200B8FDC5 /* UIView+WebCacheOperation.m in Sources */,
 				2CEF76B121EAA84E000E0FCE /* VENExplorePageModel.m in Sources */,
 				2C01107021E2105200B8FDC5 /* JXCategoryBaseCell.m in Sources */,
@@ -1735,6 +1808,7 @@
 				2C01106721E2105200B8FDC5 /* JXCategoryImageCellModel.m in Sources */,
 				2C2E2CAC21E4481300460B7E /* VENGuidePageViewControllerFive.m in Sources */,
 				2C01109E21E2105200B8FDC5 /* SDCollectionViewCell.m in Sources */,
+				2C20F6D821EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.m in Sources */,
 				2C01104F21E2105200B8FDC5 /* MJRefreshHeader.m in Sources */,
 				2C42088F21E632970033E030 /* VENLoginTableViewCell.m in Sources */,
 				2C01108121E2105200B8FDC5 /* IQBarButtonItem.m in Sources */,
@@ -1744,6 +1818,8 @@
 				2C0110A621E2105200B8FDC5 /* SDWebImageDownloader.m in Sources */,
 				2C3AB8C821EC25DE007384AE /* VENTagView.m in Sources */,
 				2C01104321E2105200B8FDC5 /* NSBundle+MJRefresh.m in Sources */,
+				2C20F6DD21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.m in Sources */,
+				2C20F6CF21EF0776004AF5AF /* VENExplorePageDetailsViewController.m in Sources */,
 				2C01109B21E2105200B8FDC5 /* MBProgressHUD.m in Sources */,
 				2C01108721E2105200B8FDC5 /* IQUITextFieldView+Additions.m in Sources */,
 				2C01108921E2105200B8FDC5 /* IQUIView+Hierarchy.m in Sources */,

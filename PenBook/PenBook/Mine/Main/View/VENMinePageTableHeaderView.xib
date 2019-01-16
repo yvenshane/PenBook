@@ -34,13 +34,12 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTA-i6-fuk">
                     <rect key="frame" x="30" y="61" width="52" height="21"/>
-                    <color key="backgroundColor" red="0.99215686274509807" green="0.34509803921568627" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="52" id="VbR-qo-Cog"/>
                         <constraint firstAttribute="height" constant="21" id="bFw-vm-H6h"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <state key="normal" title="  99" image="icon_girl">
+                    <state key="normal" title="  99">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                 </button>
@@ -169,6 +168,22 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cv9-0K-ICG">
+                    <rect key="frame" x="245" y="251.5" width="100" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="QO1-sf-l9W"/>
+                        <constraint firstAttribute="height" constant="21" id="g5I-Q8-xGE"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最近在玩：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ci-e4-V9j">
+                    <rect key="frame" x="192.5" y="255" width="51.5" height="14"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="14" id="2sr-cT-4ls"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="0.63529411759999999" green="0.63529411759999999" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -177,19 +192,23 @@
                 <constraint firstItem="CC7-0z-Kmv" firstAttribute="trailing" secondItem="VuX-Gl-UEO" secondAttribute="trailing" constant="30" id="7p5-ax-kkx"/>
                 <constraint firstItem="otN-Vq-qED" firstAttribute="top" secondItem="CC7-0z-Kmv" secondAttribute="top" constant="17" id="960-U3-dPx"/>
                 <constraint firstItem="ZaR-YQ-asY" firstAttribute="leading" secondItem="CC7-0z-Kmv" secondAttribute="leading" constant="30" id="HXZ-UZ-LjT"/>
+                <constraint firstItem="5Ci-e4-V9j" firstAttribute="centerY" secondItem="cv9-0K-ICG" secondAttribute="centerY" id="MMz-UQ-ctT"/>
                 <constraint firstItem="CC7-0z-Kmv" firstAttribute="trailing" secondItem="otN-Vq-qED" secondAttribute="trailing" constant="30" id="MQn-rm-NNw"/>
                 <constraint firstItem="CC7-0z-Kmv" firstAttribute="trailing" secondItem="0m0-qn-Q0M" secondAttribute="trailing" constant="20" id="MZh-OO-Cad"/>
                 <constraint firstItem="0m0-qn-Q0M" firstAttribute="leading" secondItem="CC7-0z-Kmv" secondAttribute="leading" constant="20" id="MfN-kl-kLA"/>
+                <constraint firstItem="CC7-0z-Kmv" firstAttribute="trailing" secondItem="cv9-0K-ICG" secondAttribute="trailing" constant="30" id="Owr-ic-oL3"/>
                 <constraint firstItem="0m0-qn-Q0M" firstAttribute="top" secondItem="vrG-lH-uMX" secondAttribute="bottom" constant="20" id="WjT-DS-wHw"/>
                 <constraint firstItem="vrG-lH-uMX" firstAttribute="top" secondItem="GTA-i6-fuk" secondAttribute="bottom" constant="24" id="XyH-Nw-bEE"/>
                 <constraint firstItem="Z8S-nq-Pbb" firstAttribute="centerY" secondItem="ZaR-YQ-asY" secondAttribute="centerY" id="YD0-5D-gtG"/>
                 <constraint firstItem="Z8S-nq-Pbb" firstAttribute="leading" secondItem="ZaR-YQ-asY" secondAttribute="trailing" constant="11" id="YmZ-hD-Ulj"/>
+                <constraint firstItem="cv9-0K-ICG" firstAttribute="leading" secondItem="5Ci-e4-V9j" secondAttribute="trailing" constant="1" id="bjh-f6-kjJ"/>
                 <constraint firstItem="GTA-i6-fuk" firstAttribute="top" secondItem="FSh-lb-5RP" secondAttribute="bottom" constant="8" id="c74-qO-TB6"/>
                 <constraint firstItem="GTA-i6-fuk" firstAttribute="leading" secondItem="FSh-lb-5RP" secondAttribute="leading" id="cp7-cT-o0S"/>
                 <constraint firstItem="VuX-Gl-UEO" firstAttribute="centerY" secondItem="vrG-lH-uMX" secondAttribute="centerY" id="esd-4m-u6w"/>
                 <constraint firstItem="ZaR-YQ-asY" firstAttribute="top" secondItem="0m0-qn-Q0M" secondAttribute="bottom" constant="33" id="feO-e6-XRK"/>
                 <constraint firstItem="otN-Vq-qED" firstAttribute="leading" secondItem="FSh-lb-5RP" secondAttribute="trailing" constant="16" id="fzK-Hm-aIT"/>
                 <constraint firstItem="JK3-d5-s9v" firstAttribute="leading" secondItem="GTA-i6-fuk" secondAttribute="trailing" constant="12" id="gXb-Rq-vVr"/>
+                <constraint firstItem="cv9-0K-ICG" firstAttribute="centerY" secondItem="Z8S-nq-Pbb" secondAttribute="centerY" id="hhN-1j-mUr"/>
                 <constraint firstItem="VuX-Gl-UEO" firstAttribute="leading" secondItem="vrG-lH-uMX" secondAttribute="trailing" constant="5" id="isn-D3-cR7"/>
                 <constraint firstItem="JK3-d5-s9v" firstAttribute="centerY" secondItem="GTA-i6-fuk" secondAttribute="centerY" id="qT7-8K-oFs"/>
                 <constraint firstItem="FSh-lb-5RP" firstAttribute="leading" secondItem="CC7-0z-Kmv" secondAttribute="leading" constant="30" id="ywI-Tw-44d"/>
@@ -197,6 +216,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="CC7-0z-Kmv"/>
             <connections>
+                <outlet property="gameView" destination="cv9-0K-ICG" id="Rnq-oq-oeM"/>
+                <outlet property="gameViewLayoutConstraint" destination="QO1-sf-l9W" id="BWw-7G-guS"/>
                 <outlet property="iconImageView" destination="otN-Vq-qED" id="iGt-Cj-xBt"/>
                 <outlet property="myFansButton" destination="rJV-j0-alH" id="FLt-r1-MYy"/>
                 <outlet property="myFocusButton" destination="DSn-Pw-s0T" id="LSX-Dl-WQF"/>
@@ -207,13 +228,12 @@
                 <outlet property="threeButtonBackgroundView" destination="0m0-qn-Q0M" id="egT-d5-0Xf"/>
                 <outlet property="xingzuoLabel" destination="JK3-d5-s9v" id="mfU-wd-seM"/>
             </connections>
-            <point key="canvasLocation" x="75.5" y="-424.5"/>
+            <point key="canvasLocation" x="74.400000000000006" y="-425.03748125937034"/>
         </view>
     </objects>
     <resources>
         <image name="icon_fans" width="26" height="28"/>
         <image name="icon_game2" width="26" height="26"/>
-        <image name="icon_girl" width="13" height="13"/>
         <image name="icon_like2" width="26" height="26"/>
         <image name="icon_qianming" width="18" height="17"/>
         <image name="icon_zuji" width="26" height="26"/>

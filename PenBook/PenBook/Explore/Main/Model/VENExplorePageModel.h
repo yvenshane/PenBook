@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSArray *head;
 @property (nonatomic, copy) NSArray *image;
 
+@property (nonatomic, copy) NSString *gamename;
+
 //image => [
 //          arid=>所属文章id 和上面文章id是同一个值
 //          image=>文章图片地址

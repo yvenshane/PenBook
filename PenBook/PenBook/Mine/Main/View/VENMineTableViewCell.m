@@ -13,6 +13,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    self.iconImageView.layer.cornerRadius = 34 / 2;
+    self.iconImageView.layer.masksToBounds = YES;
+    
+    self.gameNameButton.layer.cornerRadius = 8;
+    self.gameNameButton.layer.masksToBounds = YES;
+    
+    self.picViewLayoutConstraint.constant = (kMainScreenWidth - 60) / 3;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

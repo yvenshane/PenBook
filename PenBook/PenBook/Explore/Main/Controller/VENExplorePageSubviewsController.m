@@ -12,6 +12,8 @@
 
 @interface VENExplorePageSubviewsController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, copy) NSArray *dataArr;
+@property (nonatomic, strong) UIImageView *gamePicImageView;
+@property (nonatomic, strong) UIImageView *picImageView;
 
 @end
 
@@ -37,10 +39,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
         
         [self.tableView.mj_header endRefreshing];;
         
-        NSArray *dataArr = [NSArray yy_modelArrayWithClass:[VENExplorePageModel class] json:response[@"arr"]];
-        self.dataArr = dataArr;
-        
-        [self.tableView reloadData];
+        if ([response[@"ret"] integerValue] == 1) {
+            NSArray *dataArr = [NSArray yy_modelArrayWithClass:[VENExplorePageModel class] json:response[@"arr"]];
+            self.dataArr = dataArr;
+            
+            [self.tableView reloadData];
+        }
         
     } failureBlock:^(NSError *error) {
         [self.tableView.mj_header endRefreshing];
@@ -79,7 +83,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [cell.talkButton setTitle:[NSString stringWithFormat:@"  %@", model.comment] forState:UIControlStateNormal];
     [cell.shareButton setTitle:[NSString stringWithFormat:@"  %@", model.share] forState:UIControlStateNormal];
     
+    
     // gamePic
+    for (UIView *subViews in cell.gameView.subviews) {
+        [subViews removeFromSuperview];
+    }
+    
     for (NSInteger i = 0; i < model.head.count; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 12, 0, 21, 21)];
         [imageView sd_setImageWithURL:[NSURL URLWithString:model.head[i][@"portrait"]]];
@@ -90,6 +99,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     
     // pic
+    for (UIView *subViews in cell.picView.subviews) {
+        [subViews removeFromSuperview];
+    }
+    
     for (NSInteger i = 0; i < model.image.count; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * (kMainScreenWidth - 44) / 3 + i * 16, 0, (kMainScreenWidth - 44) / 3, (kMainScreenWidth - 44) / 3)];
         [imageView sd_setImageWithURL:[NSURL URLWithString:model.image[i][@"image"]]];
@@ -98,7 +111,40 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [cell.picView addSubview:imageView];
     }
     
+    if (model.image.count < 1) {
+        cell.picViewlayoutConstraint.constant = 1;
+    }
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    VENExplorePageModel *model = self.dataArr[indexPath.row];
+//
+//    NSDictionary *params = @{};
+//    if (![[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
+//        params = @{@"articleid" : model.articleID,
+//                   @"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
+//    } else {
+//        params = @{@"articleid" : model.articleID};
+//    }
+//
+//    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamefootprint" params:params showLoading:NO successBlock:^(id response) {
+//
+//        if ([response[@"ret"] integerValue] == 1) {
+//            VENExplorePageDetailsViewController *vc = [[VENExplorePageDetailsViewController alloc] init];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
+//
+//    } failureBlock:^(NSError *error) {
+//
+//    }];
+    
+    self.block(model.title);
+    
+
 }
 
 - (void)setupTableView {
@@ -112,11 +158,16 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [self.view addSubview:tableView];
     
     tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-     
-#pragma mark - userid
+
+        NSDictionary *parmas = @{};
+
+        if (![[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
+            parmas = @{@"gamenid" : self.gamenid,
+                       @"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
+        } else {
+            parmas = @{@"gamenid" : self.gamenid};
+        }
         
-        
-        NSDictionary *parmas = @{@"gamenid" : self.gamenid};
         [self loadDataWith:parmas];
     }];
     

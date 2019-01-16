@@ -7,7 +7,9 @@
 //
 
 #import "VENBaseViewController.h"
+typedef void (^loginoutSuccess)(NSString *);
 
 @interface VENMinePageSettingViewController : VENBaseViewController
+@property (nonatomic, copy) loginoutSuccess block;
 
 @end

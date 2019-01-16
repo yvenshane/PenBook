@@ -17,9 +17,13 @@
 #import "VENMinePagemMyGameViewController.h"
 
 #import "VENMineModel.h"
+#import "VENExplorePageModel.h"
+#import "VENLoginViewController.h"
 
 @interface VENMineViewController ()<UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) VENMineModel *model;
+@property (nonatomic, copy) NSArray *dataArr;
 
 @end
 
@@ -32,33 +36,90 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-    [self loadData];
+    [self setupNavigationItemLeftBarButtonItem];
+    [self setupNavigationItemRightBarButtonItem];
+    [self setupTableView];
     
-
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)loadData {
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordtext/appuser" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:YES successBlock:^(id response) {
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordtext/appuser" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:NO successBlock:^(id response) {
         
         self.model = [VENMineModel yy_modelWithJSON:response];
-
-        [self setupNavigationItemLeftBarButtonItem];
-        [self setupNavigationItemRightBarButtonItem];
-        
-        [self setupTableView];
         
     } failureBlock:^(NSError *error) {
         
     }];
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"/Recordkernel/footprint" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:NO successBlock:^(id response) {
+        
+        [self.tableView.mj_header endRefreshing];
+        
+        if ([response[@"ret"] integerValue] == 1) {
+            NSArray *dataArr = [NSArray yy_modelArrayWithClass:[VENExplorePageModel class] json:response[@"arr"]];
+            self.dataArr = dataArr;
+            
+            self.tableView.tableHeaderView = nil;
+            [self setupHeaderView];
+            [self.tableView reloadData];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        [self.tableView.mj_header endRefreshing];
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VENMineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    VENExplorePageModel *model = self.dataArr[indexPath.row];
+    
+    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.headpic]];
+    cell.nameLabel.text = model.username;
+    cell.contentLabel.text = model.value;
+    cell.dateLabel.text = model.uptime;
+    
+    [cell.gameNameButton setTitle:model.gamename forState:UIControlStateNormal];
+    
+    if ([model.give_state integerValue] == 1) {
+        cell.zanButton.selected = YES;
+    } else if ([model.give_state integerValue] == 0) {
+        cell.zanButton.selected = NO;
+    }
+    
+    if ([model.collect_state integerValue] == 1) {
+        cell.focusButton.selected = YES;
+    } else if ([model.give_state integerValue] == 0) {
+        cell.focusButton.selected = NO;
+    }
+    
+    [cell.zanButton setTitle:[NSString stringWithFormat:@"  %@", model.give] forState:UIControlStateNormal];
+    [cell.focusButton setTitle:[NSString stringWithFormat:@"  %@", model.collect] forState:UIControlStateNormal];
+    [cell.talkButton setTitle:[NSString stringWithFormat:@"  %@", model.comment] forState:UIControlStateNormal];
+    [cell.shareButton setTitle:[NSString stringWithFormat:@"  %@", model.share] forState:UIControlStateNormal];
+    
+    // pic
+    for (UIView *subViews in cell.picView.subviews) {
+        [subViews removeFromSuperview];
+    }
+    
+    for (NSInteger i = 0; i < model.image.count; i++) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * (kMainScreenWidth - 60) / 3 + i * 16, 0, (kMainScreenWidth - 60) / 3, (kMainScreenWidth - 60) / 3)];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:model.image[i][@"image"]]];
+        imageView.layer.cornerRadius = 6;
+        imageView.layer.masksToBounds = YES;
+        [cell.picView addSubview:imageView];
+    }
+    
+    if (model.image.count < 1) {
+        cell.picViewLayoutConstraint.constant = 1;
+    }
     
     return cell;
 }
@@ -72,18 +133,45 @@ static NSString *cellIdentifier = @"cellIdentifier";
     tableView.estimatedRowHeight = 380;
     [tableView registerNib:[UINib nibWithNibName:@"VENMineTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:tableView];
+    
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+        [self loadData];
+    }];
+    
+    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+    }];
+    
+    _tableView = tableView;
+}
 
+- (void)setupHeaderView {
     VENMinePageTableHeaderView *headerView = [[[NSBundle mainBundle] loadNibNamed:@"VENMinePageTableHeaderView" owner:nil options:nil] lastObject];
     headerView.nameLabel.text = _model.username;
+    headerView.otherButton.backgroundColor = [_model.gender isEqualToString:@"女"] ? UIColorFromRGB(0xFD5871) : UIColorFromRGB(0x789Df9);
+    [headerView.otherButton setImage:[UIImage imageNamed:[_model.gender isEqualToString:@"女"] ? @"icon_boy" : @"icon_girl"] forState:UIControlStateNormal];
     [headerView.otherButton setTitle:[NSString stringWithFormat:@"  %@", _model.age] forState:UIControlStateNormal];
     headerView.xingzuoLabel.text = _model.constell;
     headerView.qianmingLabel.text = _model.title;
+    [headerView.iconImageView sd_setImageWithURL:[NSURL URLWithString:_model.headpic]];
+    
+    for (NSInteger i = 0; i < _model.headgame.count; i++) {
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * 12, 0, 21, 21)];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:_model.headgame[i]]];
+        imageView.layer.cornerRadius = 21 / 2;
+        imageView.layer.masksToBounds = YES;
+        [headerView.gameView addSubview:imageView];
+        
+        headerView.gameViewLayoutConstraint.constant = 12 * i + 21 - 12;
+    }
     
     [headerView.myFansButton addTarget:self action:@selector(myFansButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [headerView.myFocusButton addTarget:self action:@selector(myFocusButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [headerView.myGameButton addTarget:self action:@selector(myGameButtonClick) forControlEvents:UIControlEventTouchUpInside];
     headerView.frame = CGRectMake(0, 0, kMainScreenWidth, 289);
-    tableView.tableHeaderView = headerView;
+    
+    self.tableView.tableHeaderView = headerView;
 }
 
 - (void)myFansButtonClick {
@@ -137,6 +225,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     VENMinePageSettingViewController *vc = [[VENMinePageSettingViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
+    vc.block = ^(NSString *str) {
+        VENLoginViewController *vc = [[VENLoginViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    };
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -11,13 +11,7 @@
 #import "VENExplorePageSubviewsController.h"
 #import "VENGuidePageViewControllerTwo.h"
 #import "VENExplorePageModel.h"
-
-
-
-#import "VENGuidePageViewControllerFour.h"
-
-
-
+#import "VENExplorePageDetailsViewController.h"
 
 @interface VENExplorePageViewController () <JXCategoryViewDelegate>
 @property (nonatomic, strong) JXCategoryTitleView *categoryView;
@@ -40,18 +34,13 @@ static CGFloat const categoryViewHeight = 70;
     self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"first"]) {
-        VENGuidePageViewControllerFour *vc = [[VENGuidePageViewControllerFour alloc] init];
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"first"] isEqualToString:@"1"]) {
+        VENGuidePageViewControllerTwo *vc = [[VENGuidePageViewControllerTwo alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:NO];
-    } else {
-
     }
     
     [self loadData];
-    
-    [self setupNavigationItemLeftBarButtonItem];
-    [self setupNavigationItemRightBarButtonItem];
 }
 
 - (void)loadData {
@@ -64,6 +53,8 @@ static CGFloat const categoryViewHeight = 70;
                 [self.navIDMuArr addObject:dict[@"id"]];
             }
             
+            [self setupNavigationItemLeftBarButtonItem];
+            [self setupNavigationItemRightBarButtonItem];
             [self setupCategoryView];
             [self setupSubViews];
         }
@@ -130,6 +121,12 @@ static CGFloat const categoryViewHeight = 70;
         for (int i = 0; i < count; i ++) {
             VENExplorePageSubviewsController *listVC = [[VENExplorePageSubviewsController alloc] init];
             listVC.gamenid = self.navIDMuArr[i];
+            listVC.block = ^(NSString *str) {
+                VENExplorePageDetailsViewController *vc = [[VENExplorePageDetailsViewController alloc] init];
+                vc.navigationItem.title = str;
+                vc.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:vc animated:YES];
+            };
             listVC.view.frame = CGRectMake(i*width, 0, width, height);
             [self.listVCArray addObject:listVC];
         }

@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *userid;
 @property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *gender;
+@property (nonatomic, copy) NSString *headpic;
+@property (nonatomic, copy) NSArray *headgame;
 
 @end
 

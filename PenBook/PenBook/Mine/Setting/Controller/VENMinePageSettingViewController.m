@@ -79,8 +79,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 
 - (void)logoutButtonClick {
-    NSLog(@"退出登录");
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Login"];
+    [self.navigationController popViewControllerAnimated:YES];
     
+    self.block(@"loginoutSuccess");
 }
 
 - (NSArray *)titlesArr {

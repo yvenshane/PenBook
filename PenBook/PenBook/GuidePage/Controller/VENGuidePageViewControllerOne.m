@@ -39,7 +39,7 @@
 }
 
 - (IBAction)nextButtonClick:(id)sender {    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"first"];
+    [[NSUserDefaults standardUserDefaults] setObject:@"1" forKey:@"first"];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

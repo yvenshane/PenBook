@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void (^pushNewViewControllerBlock)(NSString *);
 
 @interface VENExplorePageSubviewsController : UIViewController
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSString *gamenid;
 
+@property (nonatomic, copy) pushNewViewControllerBlock block;
+
 @end
+
+
+
+
