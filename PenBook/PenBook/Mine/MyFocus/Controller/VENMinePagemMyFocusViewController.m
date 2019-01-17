@@ -8,9 +8,11 @@
 
 #import "VENMinePagemMyFocusViewController.h"
 #import "VENMinePagemMyFansTableViewCell.h"
+#import "VENMinePagemMyFansModel.h"
 
 @interface VENMinePagemMyFocusViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, copy) NSArray *dataArr;
 
 @end
 
@@ -30,23 +32,33 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)loadData {
     [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"/Recordkernel/gamemyfollow" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:YES successBlock:^(id response) {
+        [self.tableView.mj_header endRefreshing];
         
-        [self.tableView reloadData];
-        
+        if ([response[@"ret"] integerValue] == 1) {
+            
+            NSArray *dataArr = [NSArray yy_modelArrayWithClass:[VENMinePagemMyFansModel class] json:response[@"value"]];
+            self.dataArr = dataArr;
+            
+            [self.tableView reloadData];
+        }
     } failureBlock:^(NSError *error) {
-        
+        [self.tableView.mj_header endRefreshing];
     }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArr.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     VENMinePagemMyFansTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    cell.iconImageView.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
+    VENMinePagemMyFansModel *model = self.dataArr[indexPath.row];
+    
+    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.url]];
+    cell.topLabel.text = model.username;
+    cell.bottomLabel.text = model.motto;
     
     [cell.rightButton setTitle:@"  已关注" forState:UIControlStateNormal];
     [cell.rightButton setImage:[UIImage imageNamed:@"icon_focus3"] forState:UIControlStateNormal];
@@ -70,9 +82,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [self loadData];
     }];
     
-    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        
-    }];
+//    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        
+//    }];
     
     _tableView = tableView;
 }

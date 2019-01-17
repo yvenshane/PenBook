@@ -1471,7 +1471,6 @@
 		2C7C815321E375D0004BE9A7 /* MyFocus */ = {
 			isa = PBXGroup;
 			children = (
-				2C7C815921E37660004BE9A7 /* Model */,
 				2C7C815821E37660004BE9A7 /* Controller */,
 			);
 			path = MyFocus;
@@ -1522,13 +1521,6 @@
 				2C7C816721E37ECF004BE9A7 /* VENMinePagemMyFocusViewController.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		2C7C815921E37660004BE9A7 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		2C7C815B21E37673004BE9A7 /* View */ = {

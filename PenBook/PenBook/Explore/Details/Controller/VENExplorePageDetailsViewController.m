@@ -208,9 +208,9 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
         
     }];
     
-    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        
-    }];
+//    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        
+//    }];
     
     _tableView = tableView;
 }

@@ -91,9 +91,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [self loadData];
     }];
     
-    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        
-    }];
+//    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//        
+//    }];
     
     _tableView = tableView;
 }
