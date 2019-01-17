@@ -491,7 +491,7 @@
             toolbar.doneBarButton = done;
         }
         
-        [items addObject:done];
+//        [items addObject:done];
     }
 
     //  Adding button to toolBar.

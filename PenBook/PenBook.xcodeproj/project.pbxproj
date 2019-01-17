@@ -129,6 +129,8 @@
 		2C20F6D921EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20F6D721EF4C2E004AF5AF /* VENExplorePageDetailsTableViewCellTwo.xib */; };
 		2C20F6DD21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6DB21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.m */; };
 		2C20F6DE21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20F6DC21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib */; };
+		2C20F6E121EF616A004AF5AF /* CLInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6E021EF616A004AF5AF /* CLInputToolbar.m */; };
+		2C20F6E421EF61B8004AF5AF /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6E321EF61B8004AF5AF /* UIView+CLSetRect.m */; };
 		2C2E2C9A21E4418B00460B7E /* VENGuidePageViewControllerTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */; };
 		2C2E2C9B21E4418B00460B7E /* VENGuidePageViewControllerTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */; };
 		2C2E2CA221E444B800460B7E /* VENGuidePageViewControllerThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2CA021E444B800460B7E /* VENGuidePageViewControllerThree.m */; };
@@ -439,6 +441,10 @@
 		2C20F6DA21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENExplorePageDetailsTableViewCellThree.h; sourceTree = "<group>"; };
 		2C20F6DB21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENExplorePageDetailsTableViewCellThree.m; sourceTree = "<group>"; };
 		2C20F6DC21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENExplorePageDetailsTableViewCellThree.xib; sourceTree = "<group>"; };
+		2C20F6DF21EF616A004AF5AF /* CLInputToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLInputToolbar.h; sourceTree = "<group>"; };
+		2C20F6E021EF616A004AF5AF /* CLInputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLInputToolbar.m; sourceTree = "<group>"; };
+		2C20F6E221EF61B8004AF5AF /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
+		2C20F6E321EF61B8004AF5AF /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		2C2E2C9721E4418B00460B7E /* VENGuidePageViewControllerTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENGuidePageViewControllerTwo.h; sourceTree = "<group>"; };
 		2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENGuidePageViewControllerTwo.m; sourceTree = "<group>"; };
 		2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENGuidePageViewControllerTwo.xib; sourceTree = "<group>"; };
@@ -1153,6 +1159,7 @@
 		2C20F6CB21EF0752004AF5AF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C20F6E521F009B8004AF5AF /* InputView */,
 				2C20F6D021EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.h */,
 				2C20F6D121EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.m */,
 				2C20F6D221EF44CD004AF5AF /* VENExplorePageDetailsTableViewCell.xib */,
@@ -1171,6 +1178,17 @@
 			children = (
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2C20F6E521F009B8004AF5AF /* InputView */ = {
+			isa = PBXGroup;
+			children = (
+				2C20F6E221EF61B8004AF5AF /* UIView+CLSetRect.h */,
+				2C20F6E321EF61B8004AF5AF /* UIView+CLSetRect.m */,
+				2C20F6DF21EF616A004AF5AF /* CLInputToolbar.h */,
+				2C20F6E021EF616A004AF5AF /* CLInputToolbar.m */,
+			);
+			path = InputView;
 			sourceTree = "<group>";
 		};
 		2C2E2CAE21E48CBA00460B7E /* SharedManager */ = {
@@ -1740,9 +1758,11 @@
 				2C01105421E2105200B8FDC5 /* JXCategoryIndicatorTriangleView.m in Sources */,
 				2CC87C7621E239AB005C8A3F /* VENExplorePageTableViewCell.m in Sources */,
 				2C01104921E2105200B8FDC5 /* MJRefreshAutoGifFooter.m in Sources */,
+				2C20F6E121EF616A004AF5AF /* CLInputToolbar.m in Sources */,
 				2C01109821E2105200B8FDC5 /* AFURLRequestSerialization.m in Sources */,
 				2C01109021E2105200B8FDC5 /* UIButton+AFNetworking.m in Sources */,
 				2C0110AE21E2105200B8FDC5 /* UIImageView+WebCache.m in Sources */,
+				2C20F6E421EF61B8004AF5AF /* UIView+CLSetRect.m in Sources */,
 				2C01108621E2105200B8FDC5 /* IQNSArray+Sort.m in Sources */,
 				2C51CC9521C755D9008B238E /* VENNavigationController.m in Sources */,
 				2C01109121E2105200B8FDC5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,

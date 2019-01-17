@@ -11,10 +11,15 @@
 #import "VENExplorePageModel.h"
 #import "VENExplorePageDetailsTableViewCellTwo.h"
 #import "VENExplorePageDetailsTableViewCellThree.h"
+#import "UIView+CLSetRect.h"
+#import "CLInputToolbar.h"
 
 @interface VENExplorePageDetailsViewController () <UITableViewDelegate, UITableViewDataSource>
-//@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, copy) NSArray *dataArr;
+
+@property (nonatomic, strong) CLInputToolbar *inputToolbar;
+@property (nonatomic, strong) UIView *maskView;
 
 @end
 
@@ -41,6 +46,11 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
 //    }
 //
 //    [self loadDataWith:parmas];
+    
+    // 输入框
+    [self setTextViewToolbar];
+    
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)loadDataWith:(NSDictionary *)params {
@@ -72,6 +82,8 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
     } else if (indexPath.row == 1) {
         VENExplorePageDetailsTableViewCellTwo *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier2 forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        [cell.inputButton addTarget:self action:@selector(inputButtonClick) forControlEvents:UIControlEventTouchUpInside];
         
         return cell;
     } else {
@@ -134,6 +146,41 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
 //    }
 }
 
+#pragma mark - 输入框
+- (void)setTextViewToolbar {
+    
+    self.maskView = [[UIView alloc] initWithFrame:self.view.bounds];
+    self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.39];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapActions:)];
+    [self.maskView addGestureRecognizer:tap];
+    [self.view addSubview:self.maskView];
+    self.maskView.hidden = YES;
+    self.inputToolbar = [[CLInputToolbar alloc] init];
+    self.inputToolbar.textViewMaxLine = 3;
+    self.inputToolbar.placeholder = @"写点什么吧...";
+    
+    __weak __typeof(self) weakSelf = self;
+    [self.inputToolbar inputToolbarSendText:^(NSString *text) {
+        __typeof(&*weakSelf) strongSelf = weakSelf;
+        
+        
+        // 清空输入框文字
+        [strongSelf.inputToolbar bounceToolbar];
+        strongSelf.maskView.hidden = YES;
+    }];
+    [self.maskView addSubview:self.inputToolbar];
+}
+
+- (void)tapActions:(UITapGestureRecognizer *)tap {
+    [self.inputToolbar bounceToolbar];
+    self.maskView.hidden = YES;
+}
+
+- (void)inputButtonClick {
+    self.maskView.hidden = NO;
+    [self.inputToolbar popToolbar];
+}
+
 - (void)setupTableView {
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, kMainScreenHeight - statusNavHeight) style:UITableViewStylePlain];
 //    tableView.backgroundColor = UIColorMake(247, 247, 247);
@@ -156,6 +203,16 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
     button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     [foorerView addSubview:button];
+    
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+    }];
+    
+    tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+    }];
+    
+    _tableView = tableView;
 }
 /*
 #pragma mark - Navigation
