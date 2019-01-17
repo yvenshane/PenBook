@@ -61,7 +61,7 @@
                         <viewLayoutGuide key="safeArea" id="Jzp-Lv-BZI"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4BY-Gf-viG">
-                        <rect key="frame" x="35" y="178" width="250" height="65.5"/>
+                        <rect key="frame" x="35" y="178" width="250" height="61.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="UTX-x1-WfK"/>
                         </constraints>
@@ -71,9 +71,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBV-4n-7Qi">
-                        <rect key="frame" x="0.0" y="261.5" width="80" height="16"/>
+                        <rect key="frame" x="0.0" y="257.5" width="80" height="42"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="u7p-Oo-JZc"/>
+                            <constraint firstAttribute="height" constant="42" id="u7p-Oo-JZc"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <state key="normal" title="  +999" image="icon_zan">
@@ -82,9 +82,9 @@
                         <state key="selected" image="icon_zan_sel"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8X-Ha-AbY">
-                        <rect key="frame" x="80" y="261.5" width="80" height="16"/>
+                        <rect key="frame" x="80" y="257.5" width="80" height="42"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="vY9-X1-1gK"/>
+                            <constraint firstAttribute="height" constant="42" id="vY9-X1-1gK"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <state key="normal" title="  +999" image="icon_like">
@@ -93,9 +93,9 @@
                         <state key="selected" image="icon_like_sel"/>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOb-tQ-cg2">
-                        <rect key="frame" x="160" y="261.5" width="80" height="16"/>
+                        <rect key="frame" x="160" y="257.5" width="80" height="42"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="Tb4-yb-9f5"/>
+                            <constraint firstAttribute="height" constant="42" id="Tb4-yb-9f5"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <state key="normal" title="  +999" image="icon_talk">
@@ -103,9 +103,9 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBu-AS-Ejf">
-                        <rect key="frame" x="240" y="261.5" width="80" height="16"/>
+                        <rect key="frame" x="240" y="257.5" width="80" height="42"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="xVR-Kk-oNY"/>
+                            <constraint firstAttribute="height" constant="42" id="xVR-Kk-oNY"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <state key="normal" title="  +999" image="icon_share">
@@ -129,7 +129,7 @@
                     <constraint firstItem="O8X-Ha-AbY" firstAttribute="width" secondItem="YBV-4n-7Qi" secondAttribute="width" id="7Hr-6j-Iz3"/>
                     <constraint firstItem="dOb-tQ-cg2" firstAttribute="leading" secondItem="O8X-Ha-AbY" secondAttribute="trailing" id="8Uy-o6-X52"/>
                     <constraint firstItem="xdI-o6-LmP" firstAttribute="top" secondItem="hXC-o6-iox" secondAttribute="bottom" constant="16" id="9gY-9J-Aym"/>
-                    <constraint firstAttribute="bottom" secondItem="dOb-tQ-cg2" secondAttribute="bottom" constant="22" id="E1o-uJ-Ii3"/>
+                    <constraint firstAttribute="bottom" secondItem="dOb-tQ-cg2" secondAttribute="bottom" id="E1o-uJ-Ii3"/>
                     <constraint firstAttribute="trailing" secondItem="Cc2-z4-amQ" secondAttribute="trailing" constant="30" id="EaU-hH-Vie"/>
                     <constraint firstItem="UDr-bI-aOU" firstAttribute="top" secondItem="Cc2-z4-amQ" secondAttribute="bottom" constant="15" id="F3z-tN-lka"/>
                     <constraint firstItem="BBu-AS-Ejf" firstAttribute="width" secondItem="YBV-4n-7Qi" secondAttribute="width" id="Iat-IF-AFV"/>
@@ -148,12 +148,12 @@
                     <constraint firstItem="UDr-bI-aOU" firstAttribute="leading" secondItem="hXC-o6-iox" secondAttribute="trailing" constant="12" id="lKg-PS-nBx"/>
                     <constraint firstItem="dOb-tQ-cg2" firstAttribute="top" secondItem="4BY-Gf-viG" secondAttribute="bottom" constant="18" id="mnr-qU-vFX"/>
                     <constraint firstItem="Cc2-z4-amQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nrP-nu-ftl"/>
-                    <constraint firstAttribute="bottom" secondItem="YBV-4n-7Qi" secondAttribute="bottom" constant="22" id="nrl-75-ahh"/>
+                    <constraint firstAttribute="bottom" secondItem="YBV-4n-7Qi" secondAttribute="bottom" id="nrl-75-ahh"/>
                     <constraint firstItem="4BY-Gf-viG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="35" id="ofa-WR-mrc"/>
                     <constraint firstItem="BYZ-jo-eTH" firstAttribute="leading" secondItem="UDr-bI-aOU" secondAttribute="trailing" constant="8" id="seI-sd-oI3"/>
                     <constraint firstItem="BYZ-jo-eTH" firstAttribute="centerY" secondItem="hXC-o6-iox" secondAttribute="centerY" id="y6v-wo-QYC"/>
-                    <constraint firstAttribute="bottom" secondItem="O8X-Ha-AbY" secondAttribute="bottom" constant="22" id="yaC-SN-46D"/>
-                    <constraint firstAttribute="bottom" secondItem="BBu-AS-Ejf" secondAttribute="bottom" constant="22" id="zl6-YJ-Yg4"/>
+                    <constraint firstAttribute="bottom" secondItem="O8X-Ha-AbY" secondAttribute="bottom" id="yaC-SN-46D"/>
+                    <constraint firstAttribute="bottom" secondItem="BBu-AS-Ejf" secondAttribute="bottom" id="zl6-YJ-Yg4"/>
                     <constraint firstAttribute="trailing" secondItem="BBu-AS-Ejf" secondAttribute="trailing" id="zz9-Yp-oru"/>
                 </constraints>
             </tableViewCellContentView>

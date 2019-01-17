@@ -78,9 +78,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jk-EN-1Ax">
-                                <rect key="frame" x="0.0" y="338.5" width="73.5" height="16"/>
+                                <rect key="frame" x="0.0" y="338.5" width="73.5" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="3YD-sz-t9V"/>
+                                    <constraint firstAttribute="height" constant="42" id="3YD-sz-t9V"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="  +999" image="icon_zan">
@@ -89,9 +89,9 @@
                                 <state key="selected" image="icon_zan_sel"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8J4-6R-uNg">
-                                <rect key="frame" x="73.5" y="338.5" width="73.5" height="16"/>
+                                <rect key="frame" x="73.5" y="338.5" width="73.5" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="oHD-HS-WcS"/>
+                                    <constraint firstAttribute="height" constant="42" id="oHD-HS-WcS"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="  +999" image="icon_like">
@@ -100,9 +100,9 @@
                                 <state key="selected" image="icon_like_sel"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pjn-N0-SMJ">
-                                <rect key="frame" x="147" y="338.5" width="73.5" height="16"/>
+                                <rect key="frame" x="147" y="338.5" width="73.5" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="DXR-Pb-dT3"/>
+                                    <constraint firstAttribute="height" constant="42" id="DXR-Pb-dT3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="  +999" image="icon_talk">
@@ -110,9 +110,9 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QGe-ct-PGE">
-                                <rect key="frame" x="220.5" y="338.5" width="73.5" height="16"/>
+                                <rect key="frame" x="220.5" y="338.5" width="73.5" height="42"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="dqP-pz-WXN"/>
+                                    <constraint firstAttribute="height" constant="42" id="dqP-pz-WXN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="  +999" image="icon_share">
@@ -151,7 +151,7 @@
                             <constraint firstItem="LGi-AN-gHC" firstAttribute="top" secondItem="lwI-Qj-huL" secondAttribute="bottom" constant="16" id="MuH-sK-xp3"/>
                             <constraint firstAttribute="trailing" secondItem="wUn-P9-D0A" secondAttribute="trailing" constant="22" id="Nfe-56-1K9"/>
                             <constraint firstItem="PSe-eX-Bft" firstAttribute="top" secondItem="xSf-7g-JRw" secondAttribute="bottom" constant="5" id="U0r-Ua-smf"/>
-                            <constraint firstAttribute="bottom" secondItem="pjn-N0-SMJ" secondAttribute="bottom" constant="26" id="WfK-Zo-g6g"/>
+                            <constraint firstAttribute="bottom" secondItem="pjn-N0-SMJ" secondAttribute="bottom" id="WfK-Zo-g6g"/>
                             <constraint firstItem="xSf-7g-JRw" firstAttribute="leading" secondItem="NQk-Hi-sW2" secondAttribute="trailing" constant="12" id="Z2p-kT-jUO"/>
                             <constraint firstItem="LGi-AN-gHC" firstAttribute="leading" secondItem="ovh-tK-Aeb" secondAttribute="leading" constant="22" id="aZ1-ge-9wK"/>
                             <constraint firstItem="wUn-P9-D0A" firstAttribute="leading" secondItem="PSe-eX-Bft" secondAttribute="trailing" constant="1" id="beq-lC-5xR"/>
@@ -161,16 +161,16 @@
                             <constraint firstItem="pjn-N0-SMJ" firstAttribute="leading" secondItem="8J4-6R-uNg" secondAttribute="trailing" id="dg2-Ia-nKS"/>
                             <constraint firstItem="yug-mf-zQd" firstAttribute="leading" secondItem="xSf-7g-JRw" secondAttribute="trailing" constant="12" id="dsG-MK-Dfx"/>
                             <constraint firstItem="8J4-6R-uNg" firstAttribute="width" secondItem="1jk-EN-1Ax" secondAttribute="width" id="ei9-eH-gkI"/>
-                            <constraint firstAttribute="bottom" secondItem="1jk-EN-1Ax" secondAttribute="bottom" constant="26" id="fWD-er-R5G"/>
+                            <constraint firstAttribute="bottom" secondItem="1jk-EN-1Ax" secondAttribute="bottom" id="fWD-er-R5G"/>
                             <constraint firstItem="8J4-6R-uNg" firstAttribute="top" secondItem="LGi-AN-gHC" secondAttribute="bottom" constant="18" id="g6a-Tm-7vs"/>
                             <constraint firstItem="QGe-ct-PGE" firstAttribute="width" secondItem="1jk-EN-1Ax" secondAttribute="width" id="jKF-3A-TOq"/>
-                            <constraint firstAttribute="bottom" secondItem="QGe-ct-PGE" secondAttribute="bottom" constant="26" id="mNw-w0-ZzM"/>
+                            <constraint firstAttribute="bottom" secondItem="QGe-ct-PGE" secondAttribute="bottom" id="mNw-w0-ZzM"/>
                             <constraint firstAttribute="trailing" secondItem="yug-mf-zQd" secondAttribute="trailing" constant="22" id="mmN-F7-r2A"/>
                             <constraint firstItem="lwI-Qj-huL" firstAttribute="leading" secondItem="ovh-tK-Aeb" secondAttribute="leading" constant="22" id="qa4-QH-mtm"/>
                             <constraint firstItem="wUn-P9-D0A" firstAttribute="centerY" secondItem="PSe-eX-Bft" secondAttribute="centerY" id="roD-Ok-4Iv"/>
                             <constraint firstAttribute="trailing" secondItem="lwI-Qj-huL" secondAttribute="trailing" constant="22" id="uuq-NV-b9d"/>
                             <constraint firstAttribute="trailing" secondItem="LGi-AN-gHC" secondAttribute="trailing" constant="22" id="vC8-KI-2ej"/>
-                            <constraint firstAttribute="bottom" secondItem="8J4-6R-uNg" secondAttribute="bottom" constant="26" id="vuO-lP-KFG"/>
+                            <constraint firstAttribute="bottom" secondItem="8J4-6R-uNg" secondAttribute="bottom" id="vuO-lP-KFG"/>
                             <constraint firstAttribute="trailing" secondItem="QGe-ct-PGE" secondAttribute="trailing" id="znM-bx-GM9"/>
                         </constraints>
                     </view>

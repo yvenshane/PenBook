@@ -9,6 +9,7 @@
 #import "VENExplorePageSubviewsController.h"
 #import "VENExplorePageTableViewCell.h"
 #import "VENExplorePageModel.h"
+#import "VENLoginViewController.h"
 
 @interface VENExplorePageSubviewsController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, copy) NSArray *dataArr;
@@ -74,7 +75,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     if ([model.collect_state integerValue] == 1) {
         cell.focusButton.selected = YES;
-    } else if ([model.give_state integerValue] == 0) {
+    } else if ([model.collect_state integerValue] == 0) {
         cell.focusButton.selected = NO;
     }
     
@@ -83,6 +84,14 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [cell.talkButton setTitle:[NSString stringWithFormat:@"  %@", model.comment] forState:UIControlStateNormal];
     [cell.shareButton setTitle:[NSString stringWithFormat:@"  %@", model.share] forState:UIControlStateNormal];
     
+    cell.zanButton.tag = indexPath.row;
+    cell.focusButton.tag = indexPath.row;
+    cell.shareButton.tag = indexPath.row;
+    
+    [cell.zanButton addTarget:self action:@selector(zanButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.focusButton addTarget:self action:@selector(focusButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.talkButton addTarget:self action:@selector(talkButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [cell.shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // gamePic
     for (UIView *subViews in cell.gameView.subviews) {
@@ -116,6 +125,86 @@ static NSString *cellIdentifier = @"cellIdentifier";
     }
     
     return cell;
+}
+
+- (void)zanButtonClick:(UIButton *)button {
+    NSLog(@"赞");
+    
+    [self loadDataWithUrl:@"Recordkernel/gamegive" andIdex:button.tag];
+}
+
+- (void)focusButtonClick:(UIButton *)button {
+    NSLog(@"收藏");
+    
+    if (button.selected == YES) {
+        [self loadDataWithUrl:@"Recordkernel/deletecollect" andIdex:button.tag];
+    } else {
+        [self loadDataWithUrl:@"Recordkernel/gamecollect" andIdex:button.tag];
+    }
+}
+
+- (void)talkButtonClick {
+    NSLog(@"评论");
+}
+
+- (void)shareButtonClick:(UIButton *)button {
+    NSLog(@"分享");
+    
+}
+
+- (void)loadDataWithUrl:(NSString *)url andIdex:(NSInteger)idex {
+    
+    if ([[VENLoginStatusManager sharedManager] isLogin]) {
+        
+        VENExplorePageModel *model = self.dataArr[idex];
+        
+        NSDictionary *params = @{@"articleid" : model.articleID,
+                                 @"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
+        
+        [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:url params:params showLoading:YES successBlock:^(id response) {
+            
+            if ([url isEqualToString:@"Recordkernel/gamegive"]) { // 点赞
+                
+                if ([response[@"ret"] integerValue] == 1) {
+                    model.give_state = @"1";
+                    model.give = [NSString stringWithFormat:@"%ld", [model.give integerValue] + 1];
+                } else if ([response[@"ret"] integerValue] == 2) {
+                    model.give_state = @"0";
+                    model.give = [NSString stringWithFormat:@"%ld", [model.give integerValue] - 1];
+                }
+                
+                [self.tableView reloadData];
+                
+            } else if ([url isEqualToString:@"Recordkernel/gamecollect"]) { // 收藏
+                
+                if ([response[@"ret"] integerValue] == 1) {
+                    model.collect_state = @"1";
+                    model.collect = [NSString stringWithFormat:@"%ld", [model.collect integerValue] + 1];
+                }
+                
+                [self.tableView reloadData];
+                
+            } else if ([url isEqualToString:@"Recordkernel/deletecollect"]) { // 取消收藏
+                
+                if ([response[@"ret"] integerValue] == 1) {
+                    model.collect_state = @"0";
+                    model.collect = [NSString stringWithFormat:@"%ld", [model.collect integerValue] - 1];
+                }
+                
+                [self.tableView reloadData];
+                
+            } else if ([url isEqualToString:@"Recordkernel/gameshare"]) { // 分享
+                
+            }
+            
+        } failureBlock:^(NSError *error) {
+            
+        }];
+        
+    } else {
+        VENLoginViewController *vc = [[VENLoginViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
