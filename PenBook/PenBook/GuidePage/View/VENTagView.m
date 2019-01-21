@@ -87,7 +87,7 @@
 - (void)createTagButton{
     
     // 按钮高度
-    CGFloat btnH = 50;
+    CGFloat btnH = self.buttonHeight > 0 ? self.buttonHeight : 50;
     // 距离左边距
     CGFloat leftX = 6;
     // 距离上边距

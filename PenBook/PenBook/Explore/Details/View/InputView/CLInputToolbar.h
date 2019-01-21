@@ -25,4 +25,5 @@ typedef void(^inputTextBlock)(NSString *text);
 - (void)popToolbar;
 /**点击发送后的文字*/
 - (void)inputToolbarSendText:(inputTextBlock)sendText;
+
 @end

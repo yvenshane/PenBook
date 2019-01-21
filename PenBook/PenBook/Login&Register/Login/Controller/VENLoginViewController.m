@@ -93,8 +93,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 #pragma mark - 登录
 - (void)loginButtonClick {
-    NSLog(@"登录");
-    
     VENLoginTableViewCell *cell = (VENLoginTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     if ([[VENClassEmptyManager sharedManager] isEmptyString:cell.bottomTextField.text] || cell.bottomTextField.text.length != 11) {
         [[VENMBProgressHUDManager sharedManager] showText:@"请输入手机"];

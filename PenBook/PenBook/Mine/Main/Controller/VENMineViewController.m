@@ -108,16 +108,23 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     cell.zanButton.tag = indexPath.row;
     cell.focusButton.tag = indexPath.row;
+    cell.talkButton.tag = indexPath.row;
     cell.shareButton.tag = indexPath.row;
     
     [cell.zanButton addTarget:self action:@selector(zanButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.focusButton addTarget:self action:@selector(focusButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.talkButton addTarget:self action:@selector(talkButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [cell.talkButton addTarget:self action:@selector(talkButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // pic
     for (UIView *subViews in cell.picView.subviews) {
         [subViews removeFromSuperview];
+    }
+    
+    if (model.image.count < 1) {
+        cell.picViewLayoutConstraint.constant = 1;
+    } else {
+        cell.picViewLayoutConstraint.constant = (kMainScreenWidth - 60) / 3;
     }
     
     for (NSInteger i = 0; i < model.image.count; i++) {
@@ -127,11 +134,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
         imageView.layer.masksToBounds = YES;
         [cell.picView addSubview:imageView];
     }
-    
-    if (model.image.count < 1) {
-        cell.picViewLayoutConstraint.constant = 1;
-    }
-    
+
     return cell;
 }
 
@@ -151,8 +154,16 @@ static NSString *cellIdentifier = @"cellIdentifier";
     }
 }
 
-- (void)talkButtonClick {
-    NSLog(@"评论");
+- (void)talkButtonClick:(UIButton *)button {
+    
+    
+    VENExplorePageModel *model = self.dataArr[button.tag];
+    
+    VENExplorePageDetailsViewController *vc = [[VENExplorePageDetailsViewController alloc] init];
+    vc.navigationItem.title = model.gamename;
+    vc.articleid = model.articleID;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)shareButtonClick:(UIButton *)button {
@@ -221,6 +232,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     VENExplorePageDetailsViewController *vc = [[VENExplorePageDetailsViewController alloc] init];
     vc.navigationItem.title = model.gamename;
+    vc.articleid = model.articleID;
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

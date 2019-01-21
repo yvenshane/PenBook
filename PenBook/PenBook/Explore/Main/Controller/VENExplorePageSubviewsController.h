@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void (^pushNewViewControllerBlock)(NSString *);
+@class VENExplorePageModel;
+typedef void (^pushNewViewControllerBlock)(VENExplorePageModel *);
 
 @interface VENExplorePageSubviewsController : UIViewController
 @property (nonatomic, strong) UITableView *tableView;

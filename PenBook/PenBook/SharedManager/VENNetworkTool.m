@@ -201,4 +201,55 @@ static dispatch_once_t onceToken;
     return [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
 }
 
+#pragma mark 上传单张图片
+- (void)uploadImageWithPath:(NSString *)path image:(UIImage *)image params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure {
+    
+    NSArray *array;
+    if (image == nil) {
+        array = @[];
+    } else {
+        array = [NSArray arrayWithObject:image];
+    }
+    
+    [self uploadImageWithPath:path photos:array params:params success:success failure:failure];
+}
+
+#pragma mark 上传图片
+- (void)uploadImageWithPath:(NSString *)path photos:(NSArray *)photos params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure {
+    
+    path = [[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] lowercaseString];
+    
+    NSLog(@"请求接口：%@", path);
+    
+    if (params == nil) {
+        params = @{};
+    }
+    
+    NSLog(@"请求参数：%@", params);
+    
+    NSLog(@"photos：%@", photos);
+    
+    [self POST:path parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        for (int i = 0; i < photos.count; i ++) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            formatter.dateFormat = @"yyyyMMddHHmmss";
+            NSString *str = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString stringWithFormat:@"%@.jpg",str];
+
+            UIImage *image = photos[i];
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.28);
+
+            [formData appendPartWithFileData:imageData name:@"images" fileName:fileName mimeType:@"image/jpeg"];
+        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@", responseObject);
+        [[VENMBProgressHUDManager sharedManager] showText:responseObject[@"msg"]];
+        success(responseObject);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure(error);
+    }];
+}
+
 @end

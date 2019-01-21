@@ -12,6 +12,7 @@
 #import "VENGuidePageViewControllerTwo.h"
 #import "VENExplorePageModel.h"
 #import "VENExplorePageDetailsViewController.h"
+#import "VENLoginViewController.h"
 
 @interface VENExplorePageViewController () <JXCategoryViewDelegate>
 @property (nonatomic, strong) JXCategoryTitleView *categoryView;
@@ -41,13 +42,20 @@ static CGFloat const categoryViewHeight = 70;
     }
     
     [self loadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCenter:) name:@"presentToLoginView" object:nil];
+}
+
+- (void)notificationCenter:(NSNotification *)noti {
+    VENLoginViewController *vc = [[VENLoginViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)loadData {
     
     [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamenavig" params:nil showLoading:NO successBlock:^(id response) {
         
-        if (response[@"ret"]) {
+        if ([response[@"ret"] integerValue] == 1) {
             for (NSDictionary *dict in response[@"head"]) {
                 [self.navTitlesMuArr addObject:dict[@"game"]];
                 [self.navIDMuArr addObject:dict[@"id"]];
@@ -57,6 +65,8 @@ static CGFloat const categoryViewHeight = 70;
             [self setupNavigationItemRightBarButtonItem];
             [self setupCategoryView];
             [self setupSubViews];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:response[@"head"] forKey:@"head"];
         }
         
     } failureBlock:^(NSError *error) {
@@ -121,9 +131,10 @@ static CGFloat const categoryViewHeight = 70;
         for (int i = 0; i < count; i ++) {
             VENExplorePageSubviewsController *listVC = [[VENExplorePageSubviewsController alloc] init];
             listVC.gamenid = self.navIDMuArr[i];
-            listVC.block = ^(NSString *str) {
+            listVC.block = ^(VENExplorePageModel *model) {
                 VENExplorePageDetailsViewController *vc = [[VENExplorePageDetailsViewController alloc] init];
-                vc.navigationItem.title = str;
+                vc.navigationItem.title = model.title;
+                vc.articleid = model.articleID;
                 vc.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:vc animated:YES];
             };
@@ -193,6 +204,10 @@ static CGFloat const categoryViewHeight = 70;
         _navIDMuArr = [NSMutableArray array];
     }
     return _navIDMuArr;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 /*

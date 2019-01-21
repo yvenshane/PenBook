@@ -166,8 +166,10 @@ static NSString *cellIdentifier2 = @"cellIdentifier2";
     NSDictionary *params = @{@"ip" : [[VENNetworkTool sharedManager] getIPAddress],
                              @"tel" : cell.bottomTextField.text,
                              @"code" : cell1.bottomTextField.text,
-                             @"pass" : cell2.bottomTextField.text};
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"index.php/Recordlogin/register" params:params showLoading:YES successBlock:^(id response) {
+                             @"pass" : cell2.bottomTextField.text,
+                             @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordlogin/register" params:params showLoading:YES successBlock:^(id response) {
         
         if ([response[@"ret"] integerValue] == 1) {
             [self dismissViewControllerAnimated:YES completion:nil];

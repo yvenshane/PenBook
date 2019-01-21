@@ -25,23 +25,9 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    
-//    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamerecommend" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:YES successBlock:^(id response) {
-//
-//
-//
-//    } failureBlock:^(NSError *error) {
-//
-//    }];
-    
-    
-    
-    
-    
+
     [self setupSearchTextField];
-    [self setupCategoryView];
-    
-   
+    [self setupCategoryView]; 
 }
 
 - (void)setupSearchTextField {

@@ -57,8 +57,13 @@
 }
 
 - (void)editButtonClick {
-    VENPublishViewController *vc = [[VENPublishViewController alloc] init];
-    [self presentViewController:vc animated:YES completion:nil];
+    if ([[VENLoginStatusManager sharedManager] isLogin]) {
+        VENPublishViewController *vc = [[VENPublishViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    } else {
+        VENLoginViewController *vc = [[VENLoginViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {

@@ -91,15 +91,29 @@
     [self addSubview:self.sendButton];
     self.fontSize = 20;
     self.textViewMaxLine = 3;
-    // 头像 昵称
-    UIImageView *iconImagView = [[UIImageView alloc] initWithFrame:CGRectMake(27, 30, 26, 26)];
-    iconImagView.backgroundColor = [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1];
-    [self addSubview:iconImagView];
     
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(14 + 26 + 25, 33, kMainScreenWidth - 26 - 14 - 52 - 50, 18)];
-    nameLabel.text = @"大牛哥大牛哥大牛哥";
-    nameLabel.font = [UIFont systemFontOfSize:13.0f];
-    [self addSubview:nameLabel];
+    // 获取评论 昵称 头像
+    if (![[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
+        
+        NSDictionary *params2 = @{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"],
+                                  @"type" : @"1"};
+        
+        [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/userheadtype" params:params2 showLoading:YES successBlock:^(id response) {
+            
+            // 头像 昵称
+            UIImageView *iconImagView = [[UIImageView alloc] initWithFrame:CGRectMake(27, 30, 26, 26)];
+            [iconImagView sd_setImageWithURL:[NSURL URLWithString:response[@"headpic"]]];
+            [self addSubview:iconImagView];
+            
+            UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(14 + 26 + 25, 33, kMainScreenWidth - 26 - 14 - 52 - 50, 18)];
+            nameLabel.text = response[@"username"];
+            nameLabel.font = [UIFont systemFontOfSize:13.0f];
+            [self addSubview:nameLabel];
+
+        } failureBlock:^(NSError *error) {
+            
+        }];
+    }
 }
 // 添加通知
 -(void)addNotification {

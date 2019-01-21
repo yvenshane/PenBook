@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSArray *head;
 @property (nonatomic, copy) NSArray *image;
+@property (nonatomic, copy) NSArray *com_val;
 
 @property (nonatomic, copy) NSString *gamename;
 

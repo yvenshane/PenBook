@@ -70,8 +70,8 @@
                         <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBV-4n-7Qi">
-                        <rect key="frame" x="0.0" y="257.5" width="80" height="42"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBV-4n-7Qi">
+                        <rect key="frame" x="30" y="257.5" width="65" height="42"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="42" id="u7p-Oo-JZc"/>
                         </constraints>
@@ -81,8 +81,8 @@
                         </state>
                         <state key="selected" image="icon_zan_sel"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8X-Ha-AbY">
-                        <rect key="frame" x="80" y="257.5" width="80" height="42"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O8X-Ha-AbY">
+                        <rect key="frame" x="95" y="257.5" width="65" height="42"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="42" id="vY9-X1-1gK"/>
                         </constraints>
@@ -92,8 +92,8 @@
                         </state>
                         <state key="selected" image="icon_like_sel"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOb-tQ-cg2">
-                        <rect key="frame" x="160" y="257.5" width="80" height="42"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOb-tQ-cg2">
+                        <rect key="frame" x="160" y="257.5" width="65" height="42"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="42" id="Tb4-yb-9f5"/>
                         </constraints>
@@ -102,8 +102,8 @@
                             <color key="titleColor" red="0.64705882349999999" green="0.64705882349999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBu-AS-Ejf">
-                        <rect key="frame" x="240" y="257.5" width="80" height="42"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BBu-AS-Ejf">
+                        <rect key="frame" x="225" y="257.5" width="65" height="42"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="42" id="xVR-Kk-oNY"/>
                         </constraints>
@@ -137,7 +137,7 @@
                     <constraint firstAttribute="trailing" secondItem="4BY-Gf-viG" secondAttribute="trailing" constant="35" id="Lvi-M7-ch8"/>
                     <constraint firstAttribute="trailing" secondItem="xdI-o6-LmP" secondAttribute="trailing" constant="30" id="MBr-QN-BqK"/>
                     <constraint firstItem="hXC-o6-iox" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="MX6-74-tVa"/>
-                    <constraint firstItem="YBV-4n-7Qi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="NVk-WW-eiJ"/>
+                    <constraint firstItem="YBV-4n-7Qi" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="NVk-WW-eiJ"/>
                     <constraint firstItem="hXC-o6-iox" firstAttribute="top" secondItem="Cc2-z4-amQ" secondAttribute="bottom" constant="20" id="Q47-Fh-NaW"/>
                     <constraint firstItem="dOb-tQ-cg2" firstAttribute="width" secondItem="YBV-4n-7Qi" secondAttribute="width" id="T4v-zc-TK7"/>
                     <constraint firstItem="O8X-Ha-AbY" firstAttribute="top" secondItem="4BY-Gf-viG" secondAttribute="bottom" constant="18" id="Tiz-bi-6b0"/>
@@ -154,7 +154,7 @@
                     <constraint firstItem="BYZ-jo-eTH" firstAttribute="centerY" secondItem="hXC-o6-iox" secondAttribute="centerY" id="y6v-wo-QYC"/>
                     <constraint firstAttribute="bottom" secondItem="O8X-Ha-AbY" secondAttribute="bottom" id="yaC-SN-46D"/>
                     <constraint firstAttribute="bottom" secondItem="BBu-AS-Ejf" secondAttribute="bottom" id="zl6-YJ-Yg4"/>
-                    <constraint firstAttribute="trailing" secondItem="BBu-AS-Ejf" secondAttribute="trailing" id="zz9-Yp-oru"/>
+                    <constraint firstAttribute="trailing" secondItem="BBu-AS-Ejf" secondAttribute="trailing" constant="30" id="zz9-Yp-oru"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VENExplorePageDetailsViewController : VENBaseViewController
+@property (nonatomic, copy) NSString *articleid;
 
 @end
 

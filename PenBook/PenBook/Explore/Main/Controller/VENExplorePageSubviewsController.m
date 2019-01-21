@@ -9,7 +9,6 @@
 #import "VENExplorePageSubviewsController.h"
 #import "VENExplorePageTableViewCell.h"
 #import "VENExplorePageModel.h"
-#import "VENLoginViewController.h"
 
 @interface VENExplorePageSubviewsController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, copy) NSArray *dataArr;
@@ -79,6 +78,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
         cell.focusButton.selected = NO;
     }
     
+    cell.fucosButton.tag = indexPath.row;
+    [cell.fucosButton addTarget:self action:@selector(guanzhuButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     [cell.zanButton setTitle:[NSString stringWithFormat:@"  %@", model.give] forState:UIControlStateNormal];
     [cell.focusButton setTitle:[NSString stringWithFormat:@"  %@", model.collect] forState:UIControlStateNormal];
     [cell.talkButton setTitle:[NSString stringWithFormat:@"  %@", model.comment] forState:UIControlStateNormal];
@@ -86,11 +88,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     cell.zanButton.tag = indexPath.row;
     cell.focusButton.tag = indexPath.row;
+    cell.talkButton.tag = indexPath.row;
     cell.shareButton.tag = indexPath.row;
     
     [cell.zanButton addTarget:self action:@selector(zanButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.focusButton addTarget:self action:@selector(focusButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.talkButton addTarget:self action:@selector(talkButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [cell.talkButton addTarget:self action:@selector(talkButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     // gamePic
@@ -112,6 +115,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
         [subViews removeFromSuperview];
     }
     
+    if (model.image.count < 1) {
+        cell.picViewlayoutConstraint.constant = 1;
+    } else {
+        cell.picViewlayoutConstraint.constant = (kMainScreenWidth - 44) / 3;
+    }
+    
     for (NSInteger i = 0; i < model.image.count; i++) {
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * (kMainScreenWidth - 44) / 3 + i * 16, 0, (kMainScreenWidth - 44) / 3, (kMainScreenWidth - 44) / 3)];
         [imageView sd_setImageWithURL:[NSURL URLWithString:model.image[i][@"image"]]];
@@ -119,12 +128,22 @@ static NSString *cellIdentifier = @"cellIdentifier";
         imageView.layer.masksToBounds = YES;
         [cell.picView addSubview:imageView];
     }
-    
-    if (model.image.count < 1) {
-        cell.picViewlayoutConstraint.constant = 1;
-    }
-    
+
     return cell;
+}
+
+- (void)guanzhuButtonClick:(UIButton *)button {
+    
+    VENExplorePageModel *model = self.dataArr[button.tag];
+    
+    NSDictionary *params = @{@"objectid" : model.userid,
+                             @"selfid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamefootprint" params:params showLoading:YES successBlock:^(id response) {
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (void)zanButtonClick:(UIButton *)button {
@@ -143,8 +162,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
     }
 }
 
-- (void)talkButtonClick {
+- (void)talkButtonClick:(UIButton *)button {
     NSLog(@"评论");
+    
+    VENExplorePageModel *model = self.dataArr[button.tag];
+    self.block(model);
 }
 
 - (void)shareButtonClick:(UIButton *)button {
@@ -202,38 +224,14 @@ static NSString *cellIdentifier = @"cellIdentifier";
         }];
         
     } else {
-        VENLoginViewController *vc = [[VENLoginViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"presentToLoginView" object:nil];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     VENExplorePageModel *model = self.dataArr[indexPath.row];
-//
-//    NSDictionary *params = @{};
-//    if (![[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
-//        params = @{@"articleid" : model.articleID,
-//                   @"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
-//    } else {
-//        params = @{@"articleid" : model.articleID};
-//    }
-//
-//    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamefootprint" params:params showLoading:NO successBlock:^(id response) {
-//
-//        if ([response[@"ret"] integerValue] == 1) {
-//            VENExplorePageDetailsViewController *vc = [[VENExplorePageDetailsViewController alloc] init];
-//            vc.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:vc animated:YES];
-//        }
-//
-//    } failureBlock:^(NSError *error) {
-//
-//    }];
-    
-    self.block(model.title);
-    
-
+    self.block(model);
 }
 
 - (void)setupTableView {

@@ -10,6 +10,7 @@
 #import "VENMinePagemMyGameTableViewCell.h"
 
 @interface VENMinePagemMyGameSubviewsController () <UITableViewDelegate, UITableViewDataSource>
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -22,7 +23,22 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gameplay" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:YES successBlock:^(id response) {
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
+    
+    
     [self setupTableView];
+}
+
+- (void)loadViewWithParams:(NSDictionary *)params {
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordtext/searchgame" params:params showLoading:YES successBlock:^(id response) {
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -49,6 +65,15 @@ static NSString *cellIdentifier = @"cellIdentifier";
     tableView.rowHeight = 292;
     [tableView registerNib:[UINib nibWithNibName:@"VENMinePagemMyGameTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:tableView];
+    
+    tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        
+//        NSDictionary *params = @{@"game"};
+        
+//        [self loadViewWithParams:params];
+    }];
+    
+    _tableView = tableView;
 }
 
 /*
