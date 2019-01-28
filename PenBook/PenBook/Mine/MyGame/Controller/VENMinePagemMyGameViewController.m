@@ -14,9 +14,11 @@
 @property (nonatomic, strong) JXCategoryTitleView *categoryView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) NSMutableArray <VENMinePagemMyGameSubviewsController *> *listVCArray;
+@property (nonatomic, strong) NSMutableArray *selectedItemAtIndexMuArr;
 
 @end
 
+static CGFloat const categoryViewHeight = 70;
 @implementation VENMinePagemMyGameViewController
 
 - (void)viewDidLoad {
@@ -27,7 +29,8 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
 
     [self setupSearchTextField];
-    [self setupCategoryView]; 
+    [self setupCategoryView];
+    [self setupSubViews];
 }
 
 - (void)setupSearchTextField {
@@ -69,20 +72,16 @@
     return NO;
 }
 
-- (NSArray <NSString *> *)getRandomTitles {
-    NSMutableArray *titles = @[@"推荐", @"想玩", @"在玩"].mutableCopy;
-    NSMutableArray *resultArray = [NSMutableArray array];
-    for (int i = 0; i < titles.count; i++) {
-        [resultArray addObject:titles[i]];
-    }
-    return resultArray;
-}
-
 #pragma mark - JXCategoryViewDelegate
 
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
     //侧滑手势处理
     self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
+    
+    if (![self.selectedItemAtIndexMuArr containsObject:[NSString stringWithFormat:@"%ld", (long)index]]) {
+        [self.listVCArray[index].tableView.mj_header beginRefreshing];
+        [self.selectedItemAtIndexMuArr addObject:[NSString stringWithFormat:@"%ld", (long)index]];
+    }
 }
 
 - (void)categoryView:(JXCategoryBaseView *)categoryView didClickSelectedItemAtIndex:(NSInteger)index {
@@ -98,23 +97,11 @@
 }
 
 - (void)setupCategoryView {
-    NSArray *titles = [self getRandomTitles];
-    NSUInteger count = titles.count;
-    CGFloat categoryViewHeight = 64;
-    CGFloat width = kMainScreenWidth;
-    CGFloat height = kMainScreenHeight - statusNavHeight - categoryViewHeight;
-    
-    self.listVCArray = [NSMutableArray array];
-    for (int i = 0; i < count; i ++) {
-        VENMinePagemMyGameSubviewsController *listVC = [[VENMinePagemMyGameSubviewsController alloc] init];
-        listVC.view.frame = CGRectMake(i*width, 0, width, height);
-        [self.listVCArray addObject:listVC];
-    }
     
     self.categoryView = [[JXCategoryTitleView alloc] init];
     self.categoryView.frame = CGRectMake(0, 0, kMainScreenWidth, categoryViewHeight);
     self.categoryView.delegate = self;
-    self.categoryView.titles = titles;
+    self.categoryView.titles = @[@"推荐", @"想玩", @"在玩"];
     self.categoryView.titleColor = UIColorFromRGB(0xABABAB);
     self.categoryView.titleFont = [UIFont systemFontOfSize:14.0f];
     self.categoryView.titleSelectedColor = COLOR_THEME;
@@ -129,6 +116,20 @@
     self.categoryView.indicators = @[backgroundView];
     
     [self.view addSubview:self.categoryView];
+}
+
+- (void)setupSubViews {
+    NSUInteger count = @[@"推荐", @"想玩", @"在玩"].count;
+    CGFloat width = kMainScreenWidth;
+    CGFloat height = kMainScreenHeight - statusNavHeight - categoryViewHeight;
+    
+    for (int i = 0; i < count; i ++) {
+        VENMinePagemMyGameSubviewsController *listVC = [[VENMinePagemMyGameSubviewsController alloc] init];
+        listVC.pageTag = @[@"推荐", @"想玩", @"在玩"][i];
+        listVC.view.frame = CGRectMake(i*width, 0, width, height);
+        [self.listVCArray addObject:listVC];
+        
+    }
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, categoryViewHeight,  width, height)];
     self.scrollView.pagingEnabled = YES;
@@ -141,6 +142,20 @@
     }
     
     self.categoryView.contentScrollView = self.scrollView;
+}
+
+- (NSMutableArray *)listVCArray {
+    if (_listVCArray == nil) {
+        _listVCArray = [NSMutableArray array];
+    }
+    return _listVCArray;
+}
+
+- (NSMutableArray *)selectedItemAtIndexMuArr {
+    if (_selectedItemAtIndexMuArr == nil) {
+        _selectedItemAtIndexMuArr = [NSMutableArray arrayWithArray:@[@"0"]];
+    }
+    return _selectedItemAtIndexMuArr;
 }
 
 /*

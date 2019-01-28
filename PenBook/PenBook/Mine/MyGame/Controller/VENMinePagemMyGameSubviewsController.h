@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VENMinePagemMyGameSubviewsController : UIViewController
+@property (nonatomic, copy) NSString *pageTag;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 

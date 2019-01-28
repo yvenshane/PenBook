@@ -107,7 +107,7 @@
 }
 
 - (void)rightButtonClick {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (NSMutableArray *)idMuArr {
