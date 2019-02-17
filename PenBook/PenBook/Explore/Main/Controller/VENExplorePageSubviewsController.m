@@ -136,10 +136,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     VENExplorePageModel *model = self.dataArr[button.tag];
     
-    NSDictionary *params = @{@"objectid" : model.userid,
+    NSDictionary *params = @{@"objectid" :model.userid,
                              @"selfid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
     
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamefootprint" params:params showLoading:YES successBlock:^(id response) {
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamefollow" params:params showLoading:YES successBlock:^(id response) {
         
     } failureBlock:^(NSError *error) {
         

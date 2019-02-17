@@ -27,16 +27,16 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     self.finishButon.layer.cornerRadius = 24.0f;
     self.finishButon.layer.masksToBounds = YES;
-    
+   
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"VENMinePagemMyGameTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     
-//    NSDictionary *params = @{@"useridfa" : [[VENNetworkTool sharedManager] getIDFA]};
-    NSDictionary *params = @{@"typeid" : self.types};
+    NSDictionary *params = @{@"useridfa" : [[VENNetworkTool sharedManager] getIDFA]};
+//    NSDictionary *params = @{@"typeid" : self.types};
     
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamerecommend" params:params showLoading:YES successBlock:^(id response) {
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordlogin/gamepush" params:params showLoading:YES successBlock:^(id response) {
         
         if ([response[@"ret"] integerValue] == 1) {
             NSArray *dataArr = [NSArray yy_modelArrayWithClass:[VENGuidePageFiveModel class] json:response[@"game"]];

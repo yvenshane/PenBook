@@ -119,6 +119,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
             
             [userDefaults setObject:loginSuccess forKey:@"Login"];
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"LoginSuccessfully" object:nil];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
             
         } else {

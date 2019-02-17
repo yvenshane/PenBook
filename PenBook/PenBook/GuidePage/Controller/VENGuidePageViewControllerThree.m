@@ -50,6 +50,8 @@
             [self.tagView removeFromSuperview];
             self.tagView = nil;
             
+            [self.gameIDs removeAllObjects];
+            
             if (self.tagView == nil) {
                 
                 self.dataArr = response[@"game"];

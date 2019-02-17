@@ -2291,9 +2291,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = J6M2654K9Z;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 775Z9P9692;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PenBook/VENPrefixHeader.pch";
 				INFOPLIST_FILE = PenBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2303,7 +2303,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ahaiba.PenBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "PenBook Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2312,9 +2312,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = J6M2654K9Z;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 775Z9P9692;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PenBook/VENPrefixHeader.pch";
 				INFOPLIST_FILE = PenBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2324,7 +2324,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ahaiba.PenBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "PenBook Distribution";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

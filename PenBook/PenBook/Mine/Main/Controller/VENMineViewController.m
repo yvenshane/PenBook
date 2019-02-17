@@ -43,32 +43,44 @@ static NSString *cellIdentifier = @"cellIdentifier";
     [self setupTableView];
     
     [self.tableView.mj_header beginRefreshing];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCenter:) name:@"LoginSuccessfully" object:nil];
+}
+
+- (void)notificationCenter:(NSNotification *)noti {
+    [self.tableView.mj_header beginRefreshing];
 }
 
 - (void)loadData {
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordtext/appuser" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:NO successBlock:^(id response) {
+    
+    NSString *userid = @"";
+    
+    if (![[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
+        userid = [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"];
+    }
+    
+    NSDictionary *params = @{@"userid" : userid};
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordtext/appuser" params:params showLoading:NO successBlock:^(id response) {
         
         self.model = [VENMineModel yy_modelWithJSON:response];
         
-    } failureBlock:^(NSError *error) {
-        
-    }];
-    
-    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"/Recordkernel/footprint" params:@{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]} showLoading:NO successBlock:^(id response) {
-        
-        [self.tableView.mj_header endRefreshing];
-        
-        if ([response[@"ret"] integerValue] == 1) {
+        [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"/Recordkernel/footprint" params:params showLoading:NO successBlock:^(id response) {
+            
+            [self.tableView.mj_header endRefreshing];
+            
             NSArray *dataArr = [NSArray yy_modelArrayWithClass:[VENExplorePageModel class] json:response[@"arr"]];
             self.dataArr = dataArr;
             
             self.tableView.tableHeaderView = nil;
             [self setupHeaderView];
             [self.tableView reloadData];
-        }
-        
+            
+        } failureBlock:^(NSError *error) {
+            [self.tableView.mj_header endRefreshing];
+        }];
     } failureBlock:^(NSError *error) {
-        [self.tableView.mj_header endRefreshing];
+        
     }];
 }
 
@@ -339,10 +351,15 @@ static NSString *cellIdentifier = @"cellIdentifier";
     VENMinePageSettingViewController *vc = [[VENMinePageSettingViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     vc.block = ^(NSString *str) {
-        VENLoginViewController *vc = [[VENLoginViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.tabBarController.selectedIndex = 0;
+        });
     };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

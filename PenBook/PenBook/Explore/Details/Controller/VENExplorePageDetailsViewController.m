@@ -168,7 +168,7 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
         NSDictionary *params = @{@"objectid" : self.model.userid,
                                  @"selfid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
         
-        [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamefootprint" params:params showLoading:YES successBlock:^(id response) {
+        [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/gamefollow" params:params showLoading:YES successBlock:^(id response) {
             
         } failureBlock:^(NSError *error) {
             
