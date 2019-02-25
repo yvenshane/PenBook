@@ -9,6 +9,7 @@
 #import "VENRegisterViewController.h"
 #import "VENLoginTableViewCell.h"
 #import "VENRegisterTableViewCell.h"
+#import "VENAboutUsViewController.h"
 
 @interface VENRegisterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -130,6 +131,16 @@ static NSString *cellIdentifier2 = @"cellIdentifier2";
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kMainScreenWidth, 100 + 48)];
     tableView.tableFooterView = footerView;
     
+    // 用户使用协议
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, kMainScreenWidth, 18)];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"点击立即注册代表您同意《隐私政策》"];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:UIColorFromRGB(0x4073F8) range:NSMakeRange(attributedString.length - 6, 6)];
+    [button setAttributedTitle:attributedString forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
+    [footerView addSubview:button];
+    
     UIButton *registerButton = [[UIButton alloc] initWithFrame:CGRectMake(kMainScreenWidth / 2 - 202 / 2, 100, 202, 48)];
     registerButton.backgroundColor = UIColorFromRGB(0x5061FB);
     [registerButton setTitle:@"注册" forState:UIControlStateNormal];
@@ -141,6 +152,12 @@ static NSString *cellIdentifier2 = @"cellIdentifier2";
     [footerView addSubview:registerButton];
     
     _tableView = tableView;
+}
+
+- (void)buttonClick {
+    VENAboutUsViewController *vc = [[VENAboutUsViewController alloc] init];
+    vc.HTMLString = @"http://www.bishugame.com/policy.html";
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - 注册

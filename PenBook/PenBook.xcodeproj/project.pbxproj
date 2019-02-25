@@ -132,6 +132,7 @@
 		2C20F6DE21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20F6DC21EF4FAA004AF5AF /* VENExplorePageDetailsTableViewCellThree.xib */; };
 		2C20F6E121EF616A004AF5AF /* CLInputToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6E021EF616A004AF5AF /* CLInputToolbar.m */; };
 		2C20F6E421EF61B8004AF5AF /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C20F6E321EF61B8004AF5AF /* UIView+CLSetRect.m */; };
+		2C243F5322241FA800C8CD4E /* VENAboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C243F5222241FA800C8CD4E /* VENAboutUsViewController.m */; };
 		2C2E2C9A21E4418B00460B7E /* VENGuidePageViewControllerTwo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */; };
 		2C2E2C9B21E4418B00460B7E /* VENGuidePageViewControllerTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */; };
 		2C2E2CA221E444B800460B7E /* VENGuidePageViewControllerThree.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C2E2CA021E444B800460B7E /* VENGuidePageViewControllerThree.m */; };
@@ -475,6 +476,8 @@
 		2C20F6E021EF616A004AF5AF /* CLInputToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLInputToolbar.m; sourceTree = "<group>"; };
 		2C20F6E221EF61B8004AF5AF /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		2C20F6E321EF61B8004AF5AF /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
+		2C243F5122241FA700C8CD4E /* VENAboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VENAboutUsViewController.h; sourceTree = "<group>"; };
+		2C243F5222241FA800C8CD4E /* VENAboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VENAboutUsViewController.m; sourceTree = "<group>"; };
 		2C2E2C9721E4418B00460B7E /* VENGuidePageViewControllerTwo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VENGuidePageViewControllerTwo.h; sourceTree = "<group>"; };
 		2C2E2C9821E4418B00460B7E /* VENGuidePageViewControllerTwo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VENGuidePageViewControllerTwo.m; sourceTree = "<group>"; };
 		2C2E2C9921E4418B00460B7E /* VENGuidePageViewControllerTwo.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VENGuidePageViewControllerTwo.xib; sourceTree = "<group>"; };
@@ -1510,6 +1513,8 @@
 		2C42086B21E5D3B70033E030 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2C243F5122241FA700C8CD4E /* VENAboutUsViewController.h */,
+				2C243F5222241FA800C8CD4E /* VENAboutUsViewController.m */,
 				2C42089421E63B580033E030 /* VENRegisterViewController.h */,
 				2C42089521E63B580033E030 /* VENRegisterViewController.m */,
 			);
@@ -2160,6 +2165,7 @@
 				2C01105F21E2105200B8FDC5 /* JXCategoryTitleImageView.m in Sources */,
 				2C0110AD21E2105200B8FDC5 /* NSData+ImageContentType.m in Sources */,
 				2C01107921E2105200B8FDC5 /* MASConstraint.m in Sources */,
+				2C243F5322241FA800C8CD4E /* VENAboutUsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2291,9 +2297,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 775Z9P9692;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = J6M2654K9Z;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PenBook/VENPrefixHeader.pch";
 				INFOPLIST_FILE = PenBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2303,7 +2309,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ahaiba.PenBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = PenBook_Distribution_Ad_Hoc;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2312,9 +2318,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 775Z9P9692;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = J6M2654K9Z;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PenBook/VENPrefixHeader.pch";
 				INFOPLIST_FILE = PenBook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2324,7 +2330,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ahaiba.PenBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = PenBook_Distribution_Ad_Hoc;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

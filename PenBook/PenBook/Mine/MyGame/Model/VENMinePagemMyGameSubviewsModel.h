@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *image;
 @property (nonatomic, copy) NSString *ituuesid;
 @property (nonatomic, copy) NSString *star;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *poster;
 
 @end
 

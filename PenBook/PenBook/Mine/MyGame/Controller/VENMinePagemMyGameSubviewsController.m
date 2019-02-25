@@ -42,11 +42,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
             [self.tableView.mj_header endRefreshing];
             
             if ([response[@"ret"] integerValue] == 1) {
-                self.gamerecommendArr = [NSArray yy_modelArrayWithClass:[VENMinePagemMyGameSubviewsModel class] json:response[@"head"]];
+                self.gamerecommendArr = [NSArray yy_modelArrayWithClass:[VENMinePagemMyGameSubviewsModel class] json:response[@"game"]];
+                [self.tableView reloadData];
             }
-            
-            [self.tableView reloadData];
-            
         } failureBlock:^(NSError *error) {
             [self.tableView.mj_header endRefreshing];
         }];
@@ -85,7 +83,18 @@ static NSString *cellIdentifier = @"cellIdentifier";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     if ([self.pageTag isEqualToString:@"推荐"]) {
-
+        VENMinePagemMyGameSubviewsModel *model = self.gamerecommendArr[indexPath.row];
+        
+        [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.image]];
+        cell.topLabel.text = model.name;
+        cell.bottomLabel.text = model.heat;
+        cell.starCount = model.star;
+        [cell.imageView2 sd_setImageWithURL:[NSURL URLWithString:model.poster]];
+        [cell.rightButton setTitle:@"下载" forState:UIControlStateNormal];
+        cell.rightButton.backgroundColor = UIColorFromRGB(0xFBC82E);
+        cell.rightButton.tag = indexPath.row;
+        [cell.rightButton addTarget:self action:@selector(rightButtonClick2:) forControlEvents:UIControlEventTouchUpInside];
+        
     } else {
         VENMinePagemMyGameSubviewsModel *model = self.gameplayArr[indexPath.row];
         
@@ -127,6 +136,24 @@ static NSString *cellIdentifier = @"cellIdentifier";
     }];
 }
 
+- (void)rightButtonClick2:(UIButton *)button {
+    VENMinePagemMyGameSubviewsModel *model = self.gamerecommendArr[button.tag];
+    
+    NSDictionary *params = @{@"idfa" : [[VENNetworkTool sharedManager] getIDFA],
+                             @"ip" : [[VENNetworkTool sharedManager] getIPAddress],
+                             @"callback" : [NSString stringWithFormat:@"%@?idfa={%@}&ip={%@}", model.callback, [[VENNetworkTool sharedManager] getIDFA], [[VENNetworkTool sharedManager] getIPAddress]]};
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:[model.click substringFromIndex:23] params:params showLoading:YES successBlock:^(id response) {
+        
+        if ([response[@"ret"] integerValue] == 0) {
+            [[UIApplication sharedApplication]openURL:[NSURL URLWithString:[NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id%@", model.ituuesid]]];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [self.pageTag isEqualToString:@"推荐"] ? 192 : 92;
 }
@@ -137,7 +164,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
     tableView.delegate = self;
     tableView.dataSource = self;
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.rowHeight = 292;
     [tableView registerNib:[UINib nibWithNibName:@"VENMinePagemMyGameTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     [self.view addSubview:tableView];
     
