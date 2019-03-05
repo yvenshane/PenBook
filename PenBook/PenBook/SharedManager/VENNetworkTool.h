@@ -23,7 +23,7 @@ typedef enum {
 - (void)startMonitorNetworkWithBlock:(NetworkStatusBlock)block;
 - (NSString *)getIPAddress;
 - (NSString *)getIDFA;
-- (void)uploadImageWithPath:(NSString *)path image:(UIImage *)image params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure;
-- (void)uploadImageWithPath:(NSString *)path photos:(NSArray *)photos params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure;
+- (void)uploadImageWithPath:(NSString *)path image:(UIImage *)image name:(NSString *)name params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure;
+- (void)uploadImageWithPath:(NSString *)path photos:(NSArray *)photos name:(NSString *)name params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure;
 
 @end

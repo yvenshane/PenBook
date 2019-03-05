@@ -8,6 +8,7 @@
 
 #import "VENMinePageSettingViewController.h"
 #import "VENMinePageSettingTableViewCell.h"
+#import "VENMinePageSettingPersonalDataViewController.h"
 
 @interface VENMinePageSettingViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, copy) NSArray *titlesArr;
@@ -44,7 +45,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
-        
+        VENMinePageSettingPersonalDataViewController *vc = [[VENMinePageSettingPersonalDataViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 1) {
         
     } else if (indexPath.row == 2) {

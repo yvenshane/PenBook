@@ -10,6 +10,7 @@
 #import "VENLoginTableViewCell.h"
 #import "VENRegisterTableViewCell.h"
 #import "VENAboutUsViewController.h"
+#import "VENSetNicknameViewController.h"
 
 @interface VENRegisterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -167,36 +168,37 @@ static NSString *cellIdentifier2 = @"cellIdentifier2";
         [[VENMBProgressHUDManager sharedManager] showText:@"请输入手机"];
         return;
     }
-    
+
     VENRegisterTableViewCell *cell1 = (VENRegisterTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
     if ([[VENClassEmptyManager sharedManager] isEmptyString:cell1.bottomTextField.text]) {
         [[VENMBProgressHUDManager sharedManager] showText:@"请输入验证码"];
         return;
     }
-    
+
     VENLoginTableViewCell *cell2 = (VENLoginTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
     if ([[VENClassEmptyManager sharedManager] isEmptyString:cell2.bottomTextField.text]) {
         [[VENMBProgressHUDManager sharedManager] showText:@"请设置您的登录密码"];
         return;
     }
-    
+
     NSDictionary *params = @{@"ip" : [[VENNetworkTool sharedManager] getIPAddress],
                              @"tel" : cell.bottomTextField.text,
                              @"code" : cell1.bottomTextField.text,
                              @"pass" : cell2.bottomTextField.text,
                              @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
-    
+
     [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordlogin/register" params:params showLoading:YES successBlock:^(id response) {
-        
+
         if ([response[@"ret"] integerValue] == 1) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
+            VENSetNicknameViewController *vc = [[VENSetNicknameViewController alloc] init];
+            vc.userid = response[@"userid"];
+            [self presentViewController:vc animated:YES completion:nil];
         } else {
             return;
         }
-        
+
     } failureBlock:^(NSError *error) {
-        
+
     }];
 }
 

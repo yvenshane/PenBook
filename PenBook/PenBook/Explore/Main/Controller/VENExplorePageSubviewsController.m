@@ -62,7 +62,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     VENExplorePageModel *model = self.dataArr[indexPath.row];
     [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.headpic]];
-    cell.gameNameLabel.text = model.title;
+    cell.gameNameLabel.text = model.gamename;
     cell.userNameLabel.text = model.username;
     cell.contentLabel.text = model.value;
     

@@ -202,7 +202,7 @@ static dispatch_once_t onceToken;
 }
 
 #pragma mark 上传单张图片
-- (void)uploadImageWithPath:(NSString *)path image:(UIImage *)image params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure {
+- (void)uploadImageWithPath:(NSString *)path image:(UIImage *)image name:(NSString *)name params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure {
     
     NSArray *array;
     if (image == nil) {
@@ -211,11 +211,11 @@ static dispatch_once_t onceToken;
         array = [NSArray arrayWithObject:image];
     }
     
-    [self uploadImageWithPath:path photos:array params:params success:success failure:failure];
+    [self uploadImageWithPath:path photos:array name:name params:params success:success failure:failure];
 }
 
 #pragma mark 上传图片
-- (void)uploadImageWithPath:(NSString *)path photos:(NSArray *)photos params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure {
+- (void)uploadImageWithPath:(NSString *)path photos:(NSArray *)photos name:(NSString *)name params:(NSDictionary *)params success:(SuccessBlock)success failure:(FailureBlock)failure {
     
     path = [[path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] lowercaseString];
     
@@ -238,8 +238,8 @@ static dispatch_once_t onceToken;
 
             UIImage *image = photos[i];
             NSData *imageData = UIImageJPEGRepresentation(image, 0.28);
-
-            [formData appendPartWithFileData:imageData name:@"images" fileName:fileName mimeType:@"image/jpeg"];
+            
+            [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:@"image/jpeg"];
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
 

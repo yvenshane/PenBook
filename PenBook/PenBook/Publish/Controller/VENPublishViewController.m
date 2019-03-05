@@ -162,7 +162,7 @@
                              @"gameid" : [self.gameIDs componentsJoinedByString:@","],
                              @"cent" : self.contentTextView.text};
     
-    [[VENNetworkTool sharedManager] uploadImageWithPath:@"Recordtext/gametext" photos:self.pickImageMuArr params:params success:^(id response) {
+    [[VENNetworkTool sharedManager] uploadImageWithPath:@"Recordtext/gametext" photos:self.pickImageMuArr name:@"images" params:params success:^(id response) {
         
         if ([response[@"ret"] integerValue] == 1) {
             [self dismissViewControllerAnimated:YES completion:nil];
