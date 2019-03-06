@@ -303,10 +303,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (void)modifyGenderWithImage:(UIImage *)image {
     NSDictionary *params = @{@"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
     
-    [[VENNetworkTool sharedManager] uploadImageWithPath:@"Recordkernel/userheadimage" photos:@[image] name: @"imaages" params:params success:^(id response) {
+    [[VENNetworkTool sharedManager] uploadImageWithPath:@"Recordkernel/userheadimage" photos:@[image] name: @"images" params:params success:^(id response) {
         
         if ([response[@"ret"] integerValue] == 1) {
-            
+            VENMinePageSettingPersonalDataTableViewCell *cell = (VENMinePageSettingPersonalDataTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+            [cell.iconButton setImage:image forState:UIControlStateNormal];
         }
         
     } failure:^(NSError *error) {

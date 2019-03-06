@@ -227,8 +227,9 @@ static dispatch_once_t onceToken;
     
     NSLog(@"请求参数：%@", params);
     
-    NSLog(@"photos：%@", photos);
+    NSLog(@" %@ ：%@",name ,photos);
     
+    [self showLoading:YES];
     [self POST:path parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for (int i = 0; i < photos.count; i ++) {
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -242,8 +243,10 @@ static dispatch_once_t onceToken;
             [formData appendPartWithFileData:imageData name:name fileName:fileName mimeType:@"image/jpeg"];
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-
+        
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self hideLoading:YES];
+        
         NSLog(@"%@", responseObject);
         [[VENMBProgressHUDManager sharedManager] showText:responseObject[@"msg"]];
         success(responseObject);
