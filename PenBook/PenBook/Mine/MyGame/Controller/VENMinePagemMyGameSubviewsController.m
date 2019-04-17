@@ -28,7 +28,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
     
     [self setupTableView];
     
-    if ([self.pageTag isEqualToString:@"推荐"]) {
+    if ([self.pageTag isEqualToString:@"想玩"]) {
         [self.tableView.mj_header beginRefreshing];
     }
 }

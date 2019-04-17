@@ -101,7 +101,7 @@ static CGFloat const categoryViewHeight = 70;
     self.categoryView = [[JXCategoryTitleView alloc] init];
     self.categoryView.frame = CGRectMake(0, 0, kMainScreenWidth, categoryViewHeight);
     self.categoryView.delegate = self;
-    self.categoryView.titles = @[@"推荐", @"想玩", @"在玩"];
+    self.categoryView.titles = @[@"想玩", @"在玩"];
     self.categoryView.titleColor = UIColorFromRGB(0xABABAB);
     self.categoryView.titleFont = [UIFont systemFontOfSize:14.0f];
     self.categoryView.titleSelectedColor = COLOR_THEME;
@@ -119,13 +119,13 @@ static CGFloat const categoryViewHeight = 70;
 }
 
 - (void)setupSubViews {
-    NSUInteger count = @[@"推荐", @"想玩", @"在玩"].count;
+    NSUInteger count = @[@"想玩", @"在玩"].count;
     CGFloat width = kMainScreenWidth;
     CGFloat height = kMainScreenHeight - statusNavHeight - categoryViewHeight;
     
     for (int i = 0; i < count; i ++) {
         VENMinePagemMyGameSubviewsController *listVC = [[VENMinePagemMyGameSubviewsController alloc] init];
-        listVC.pageTag = @[@"推荐", @"想玩", @"在玩"][i];
+        listVC.pageTag = @[@"想玩", @"在玩"][i];
         listVC.view.frame = CGRectMake(i*width, 0, width, height);
         [self.listVCArray addObject:listVC];
         

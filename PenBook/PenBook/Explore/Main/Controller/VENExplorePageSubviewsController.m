@@ -250,9 +250,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
         if (![[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
             parmas = @{@"gamenid" : self.gamenid,
-                       @"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]};
+                       @"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"],
+                       @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
         } else {
-            parmas = @{@"gamenid" : self.gamenid};
+            parmas = @{@"gamenid" : self.gamenid,
+                       @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
         }
         
         [self loadDataWith:parmas];

@@ -37,6 +37,7 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
     
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self setupRightButton];
     [self setupTableView];
     [self setTextViewToolbar];
     [self.tableView.mj_header beginRefreshing];
@@ -103,6 +104,7 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
         [cell.focusButton addTarget:self action:@selector(focusButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.talkButton addTarget:self action:@selector(talkButtonClick) forControlEvents:UIControlEventTouchUpInside];
         [cell.shareButton addTarget:self action:@selector(shareButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.jinzhiButton addTarget:self action:@selector(jinzhiButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         // gamePic
         for (UIView *subViews in cell.gameView.subviews) {
@@ -202,6 +204,28 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
 - (void)shareButtonClick:(UIButton *)button {
     NSLog(@"分享");
     
+}
+
+- (void)jinzhiButtonClick:(UIButton *)button {
+    NSDictionary *params = @{};
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
+        params =  @{@"arid" : self.articleid,
+                    @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
+    } else {
+        params =  @{@"arid" : self.articleid,
+                    @"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"],
+                    @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
+    }
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/userhide" params:params showLoading:YES successBlock:^(id response) {
+        
+        if ([response[@"ret"] integerValue] == 1) {
+            button.selected = YES;
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
 }
 
 - (void)loadDataWithUrl:(NSString *)url andIdex:(NSInteger)idex {
@@ -358,6 +382,40 @@ static NSString *cellIdentifier3 = @"cellIdentifier3";
     
     _tableView = tableView;
 }
+
+- (void)setupRightButton {
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+    [button setTitle:@"举报" forState:UIControlStateNormal];
+    [button setTitleColor:UIColorMake(204, 14, 38) forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:15.0f];
+    [button addTarget:self action:@selector(rightButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.rightBarButtonItem = barButton;
+}
+
+- (void)rightButtonClick {
+    
+    NSDictionary *params = @{};
+    if ([[VENClassEmptyManager sharedManager] isEmptyString:[[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"]]) {
+        params =  @{@"arid" : self.articleid,
+                    @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
+    } else {
+        params =  @{@"arid" : self.articleid,
+                    @"userid" : [[NSUserDefaults standardUserDefaults] objectForKey:@"Login"][@"userid"],
+                    @"idfa" : [[VENNetworkTool sharedManager] getIDFA]};
+    }
+    
+    [[VENNetworkTool sharedManager] requestWithMethod:HTTPMethodGet path:@"Recordkernel/arreport" params:params showLoading:YES successBlock:^(id response) {
+        
+        if ([response[@"ret"] integerValue] == 1) {
+            
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
+}
+
 /*
 #pragma mark - Navigation
 
